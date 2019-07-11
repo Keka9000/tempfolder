@@ -6,7 +6,7 @@
           <v-flex xs2>
             <div class="page-auth">
 
-                    <img alt="logo" src="../assets/mosaica_logo.png">
+                    <img alt="logo" src="@/assets/mosaica_logo.png">
                     <form-login/>
 
             </div>
@@ -20,7 +20,7 @@
 
 <script>
 
-    import FormLogin from '@/components/forms/form-login-no-validation'
+    import FormLogin from './forms/form-login-no-validation'
 
     export default {
 
