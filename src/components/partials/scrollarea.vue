@@ -24,9 +24,9 @@
                     <slot name="body"></slot>
                 </div>
 
-                <v-divider v-if="$slots.footer"/>
+                <!-- <v-divider v-if="$slots.footer"/> -->
 
-                <div v-if="$slots.footer" class="scrollarea__footer">
+                <div v-if="$slots.footer" class="scrollarea__footer" style="margin-top: 10px;">
                     <slot name="footer"></slot>
                 </div>
 
@@ -103,12 +103,28 @@
 
 <style lang="stylus">
 
+    ::-webkit-scrollbar
+      width: 8px;
+
+
+    ::-webkit-scrollbar-track
+      -webkit-box-shadow: inset 0 0 4px #F7941D;
+      /* -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3); */
+      border-radius: 4px;
+
+    ::-webkit-scrollbar-thumb
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 4px #F7941D;
+      /* -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.5); */
+
+
     .scrollarea
 
         position: relative
 
         width: 100%
         height: 100%
+
 
         &__wrapper
 

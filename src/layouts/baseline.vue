@@ -2,11 +2,17 @@
 
     <v-app>
 
-        <v-toolbar color="primary" dark>
+        <v-toolbar flat color="back" mb-3>
 
             <v-menu :nudge-width="100">
               <template v-slot:activator="{ on }">
-                <v-toolbar-side-icon v-on="on"></v-toolbar-side-icon>
+                <!-- <v-toolbar-side-icon  v-on="on" class="primary"></v-toolbar-side-icon> -->
+                <!-- <v-toolbar-side-icon v-on="on">
+                  <v-icon color="primary">menu</v-icon>
+                </v-toolbar-side-icon> -->
+                <v-btn v-on="on" icon>
+                    <v-icon x-large color="primary">menu</v-icon>
+                </v-btn>
               </template>
 
               <v-list>
@@ -20,20 +26,21 @@
               </v-list>
             </v-menu>
 
-            <v-toolbar-title class="ml-2">
+            <!-- <v-toolbar-title class="ml-2">
                 {{data.title}}
-            </v-toolbar-title>
+            </v-toolbar-title> -->
 
-            <div>
+            <div style="border-bottom: solid 1px #F7941D; padding-left: 30px">
               <v-tabs
                 v-model="activePage"
-                color="primary" dark
-                align-with-title
+                color="back" light
+                align-with-title--
                 dense
               >
-                <v-tabs-slider color="secondary"></v-tabs-slider>
+                <v-tabs-slider color="primary" style="height: 6px"></v-tabs-slider>
 
                 <v-tab
+                  class="font-weight-black"
                   v-for="(page, index) in pages[data.key]"
                   :key="index"
                   :to="page.path"
@@ -100,12 +107,34 @@
                   <template v-slot:badge >
                     <span>3</span>
                   </template> -->
-            <v-toolbar-items>
-              <v-btn depressed small color="error" >Аварий 28</v-btn>
-              <v-btn depressed small color="warning darken-1">Предупреждений 12</v-btn>
-              <v-btn depressed small color="accent">Потерь связи 38</v-btn>
-              <v-btn disabled flat>Иван Иванович</v-btn>
-            </v-toolbar-items>
+
+              <v-toolbar-items>
+                <v-layout column class="green--" align-start justify-start>
+
+
+                  <v-layout>
+                    <v-flex pa-1 class="error">
+                      <span class="subheading back--text">28 аварий</span>
+                    </v-flex>
+                    <v-flex pa-1 class="warning">
+                      <span class="subheading back--text">12 предупреждений</span>
+                    </v-flex>
+                    <v-flex pa-1 class="yellow">
+                      <span class="subheading back--text">131 сбой</span>
+                    </v-flex>
+                    <v-flex pa-1 class="grey">
+                      <span class="subheading back--text">4538 потерь связи</span>
+                    </v-flex>
+
+                    <!-- <v-btn depressed small color="warning darken-1">Предупреждений 12</v-btn>
+                    <v-btn depressed small color="accent">Потерь связи 38</v-btn> -->
+                    <v-btn disabled flat>Иван Иванович</v-btn>
+                  </v-layout>
+
+                  <v-layout fill-height>
+                </v-layout>
+                </v-layout>
+              </v-toolbar-items>
                 <!-- </v-badge> -->
 
 
@@ -123,12 +152,12 @@
             <!-- <v-flex xs1> -->
             <!-- <v-layout row justify-end align-center> -->
               <!-- {{$route.path}} -->
-              <v-tooltip bottom>
+              <!-- <v-tooltip bottom>
                   <v-btn slot="activator" icon @click="logout">
                       <v-icon>power_settings_new</v-icon>
                   </v-btn>
                   <span>Выход</span>
-              </v-tooltip>
+              </v-tooltip> -->
             <!-- </v-layout> -->
             <!-- </v-flex> -->
 

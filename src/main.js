@@ -14,8 +14,8 @@ import 'vuetify/dist/vuetify.min.css'
 
           // primary: '#4989CC',
           back: '#fafafa',
-          primary: '#1E4972',
-          secondary: '#F7941D',
+          secondary: '#1E4972',
+          primary: '#F7941D',
           accent: '#f77e12',
           error: '#FF5252',
           warning: '#FFC107',
@@ -51,7 +51,8 @@ import axios from 'axios'
 
 const $_instanceAxios = axios.create({
 
-    baseURL: $_localhost ? 'http://192.168.50.37:5000/api/' : '/api', //monitoring
+    // baseURL: $_localhost ? 'http://192.168.50.37:5000/api/' : '/api', //monitoring
+    // baseURL: $_localhost ? 'http://192.168.50.37:3000/api/' : '/api', //cmdb
 
 });
 

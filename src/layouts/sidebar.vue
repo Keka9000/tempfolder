@@ -4,15 +4,15 @@
     class="back"
     app---
     dark---
-    floating--
+    floating
     persistent
     mobile-break-point="991"
-    width="400"
+    width="500"
   >
 
     <scroll-area>
 
-      <template slot="header">
+      <!-- <template slot="header">
 
           <v-layout fill-height>
             <v-flex xs12 class="title text-xs-center py-2">
@@ -21,32 +21,39 @@
           </v-layout>
 
 
-      </template>
+      </template> -->
 
       <template slot="body">
 
-        <v-treeview
-          v-model="tree"
-          :open="open"
-          :items="getDevices"
-          :active.sync="active"
-          activatable
-          item-key="name"
-          return-object
-          multiple-active---
-          open-on-click---
-        >
-          <template
-            v-slot:prepend="{ item, open }"
-          >
-            <v-icon v-if="!item.file">
-              {{ open ? 'folder_open' : 'folder' }}
-            </v-icon>
-            <v-icon v-else>
-              usb
-            </v-icon>
-          </template>
-        </v-treeview>
+        <v-container fluid fill-height ma-0 pa-0>
+          <!-- <v-layout column justify-start align-start style="border-right: solid 1px #F7941D; overflow-x: hidden !important"> -->
+          <v-layout column justify-start align-start style="overflow-x: hidden !important">
+
+            <v-treeview
+              v-model="tree"
+              :open="open"
+              :items="getDevices"
+              :active.sync="active"
+              activatable
+              item-key="name"
+              return-object
+              multiple-active---
+              open-on-click---
+            >
+              <template
+                v-slot:prepend="{ item, open }"
+              >
+                <v-icon v-if="!item.file">
+                  {{ open ? 'folder_open' : 'folder' }}
+                </v-icon>
+                <v-icon v-else>
+                  usb
+                </v-icon>
+              </template>
+            </v-treeview>
+
+          </v-layout>
+        </v-container>
 
       </template>
 
@@ -125,98 +132,7 @@ export default {
     },
 
     tree: [],
-    items: [
-      {
-        name: '.git'
-      },
-      {
-        name: 'node_modules'
-      },
-      {
-        name: 'public',
-        children: [
-          {
-            name: 'static',
-            children: [{
-              name: 'logo.png',
-              file: 'png'
-            }]
-          },
-          {
-            name: 'favicon.ico',
-            file: 'png'
-          },
-          {
-            name: 'index.html',
-            file: 'html'
-          }
-        ]
-      },
-      {
-        name: '1public',
-        children: [
-          {
-            name: 'static',
-            children: [{
-              name: 'logo.png',
-              file: 'png'
-            }]
-          },
-          {
-            name: 'favicon.ico',
-            file: 'png'
-          },
-          {
-            name: 'index.html',
-            file: 'html'
-          }
-        ]
-      },
-      {
-        name: '.gitignore',
-        file: 'txt'
-      },
-      {
-        name: 'babel.config.js',
-        file: 'js'
-      },
-      {
-        name: 'package.json',
-        file: 'json'
-      },
-      {
-        name: 'README.md',
-        file: 'md'
-      },
-      {
-        name: 'vue.config.js',
-        file: 'js'
-      },
-      {
-        name: 'fvdfvdfv',
-        file: 'txt'
-      },
-      {
-        name: 'vrerve',
-        file: 'js'
-      },
-      {
-        name: 'bgbfgbfb',
-        file: 'json'
-      },
-      {
-        name: 'xscscsdc',
-        file: 'md'
-      },
-      {
-        name: 'btrterewf',
-        file: 'js'
-      },
-      {
-        name: 'wecsdcsdc',
-        file: 'txt'
-      }
-    ]
+    items: []
   }),
 
   computed: {
@@ -238,7 +154,7 @@ export default {
           this.$store.dispatch('activeDevice', newVal[0])
           this.$router.push('/physical')
         } else {
-          console.log('newval', newVal[0].id)
+          console.log('newval', newVal[0].cls, newVal[0].id)
           this.$store.dispatch('activeDevice', newVal[0])
           this.$router.push('/physical/' + newVal[0].cls)
           // this.$router.push({
@@ -296,40 +212,6 @@ export default {
 
     },
 
-    // loadDevices: function () {
-    //   console.log('this.loadDevices() started')
-    //   this.$http.get('device').then((response) => {
-    //
-    //       // if (response.data.valid) {
-    //       if (response) {
-    //
-    //           console.log('Sidebar', 'loadDevices', 'response', response.data)
-    //
-    //           this.items = response.data
-    //
-    //
-    //
-    //       } else {
-    //
-    //           // this.$q.notify({
-    //           //
-    //           //     color: 'negative',
-    //           //     position: 'top',
-    //           //     message: 'При загрузке проектов возникла ошибка',
-    //           //     icon: 'report_problem'
-    //           //
-    //           // })
-    //
-    //       }
-    //
-    //   }, (err) => {
-    //
-    //       console.error('Sidebar', 'loadDevices', 'error', err)
-    //
-    //   })
-    //
-    //
-    // },
     loadConnections: function () {
       console.log('this.loadConnections() started')
     },

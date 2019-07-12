@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import devices from './devices'
+import devices from './cmdb/devices'
 // import connections from './connections'
 
 
