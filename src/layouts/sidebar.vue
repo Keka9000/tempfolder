@@ -157,11 +157,7 @@ export default {
           console.log('newval', newVal[0].cls, newVal[0].id)
           this.$store.dispatch('activeDevice', newVal[0])
           this.$router.push('/physical/' + newVal[0].cls)
-          // this.$router.push({
-          //   name: newVal[0].cls,
-          //   // params: this.active[0]
-          //   meta: newVal[0].id
-          // })
+
         }
 
     },
@@ -171,7 +167,7 @@ export default {
   created () {
     // this.onResponsiveInverted()
     // window.addEventListener('resize', this.onResponsiveInverted)
-    // this.setup()
+    this.setup()
   },
 
   mounted () {

@@ -2,62 +2,76 @@
   <v-layout fill-height justify-start align-center>
 
     <div class="cabinet red--" >
-      <v-flex v-for="(key, index) in getSlots" :key="key">
+      <v-flex v-for="(key, index) in getUnitPosition" :key="key">
         <component
-          :is="'slot-normal'"
-          :id="key"
-          :data="slot[key]"
+          :is="'unit-normal'"
+          :unit_id="key"
+          :data="getUnitData[key]"
         />
-
+        <!-- {{getUnitDevice}} -->
       </v-flex>
     </div>
 
-    <div class="cabinet-positions">
-      <div v-for="(key, index) in getSlots" :key="key"
+    <div class="unit-positions">
+      <div v-for="(key, index) in getUnitPosition" :key="key"
         class="position"
       >
         {{key}}
       </div>
     </div>
+
+    <!-- {{unit}} -->
   </v-layout>
 </template>
 
 <script>
 
-import SlotNormal from './slot-normal'
+import UnitNormal from './unit-normal'
 
 export default {
 
   components: {
 
-    'slot-normal': SlotNormal
+    'unit-normal': UnitNormal
 
   },
 
-  props: {},
+  props: {
+
+    data: {
+      type: Array,
+      default: () => ([])
+    },
+
+  },
 
   data: () => ({
 
     cabinetSize: 42,
-    slot: {},
+
+    unit: {},
 
   }),
 
   computed: {
 
-    getActiveDevice: function () {
+    getUnitPosition: function () {
 
-      return this.$store.getters['getActiveDevice']
-
-    },
-
-    getSlots: function () {
-
-      let keys = Object.keys(this.slot).slice().reverse();
+      let keys = Object.keys(this.unit).slice().reverse();
 
       return keys
 
-      // return this.slot
+    },
+
+    getUnitData () {
+
+      this.createUnits()
+      this.data.forEach(device => {
+        this.unit[device.position].open = false
+        this.unit[device.position].unit = device
+      })
+      // console.log('this.unit', this.unit)
+      return this.unit
 
     },
 
@@ -67,13 +81,20 @@ export default {
 
   created () {
 
+    console.log('cabinet-42 created')
     this.setup()
+
 
   },
 
   mounted () {},
 
-  updated () {},
+  updated () {
+
+    // this.createUnits()
+    console.log('cabinet-42 updated', this.data)
+
+  },
 
   beforeDestroy () {},
 
@@ -81,22 +102,25 @@ export default {
 
     setup: function () {
 
-      this.getSlotData()
+      this.createUnits()
 
     },
 
-    getSlotData: function () {
+    createUnits: function () {
 
       for (let i = 0; i < this.cabinetSize; i++) {
 
-        this.slot[i + 1] = {
+        this.unit[i + 1] = {
           id: i + 1,
-          open: false,
+          open: true,
+          unit: null
         }
 
       }
 
     },
+
+
 
   },
 
@@ -117,7 +141,7 @@ export default {
   /* border: solid 1px grey */
 }
 
-.cabinet-positions {
+.unit-positions {
   width:20px;
   height:900px;
   padding: 28px 0px 32px 6px;
@@ -134,7 +158,7 @@ export default {
   /* border: solid 1px grey */
 }
 
-.slot {
+.unit {
   height: 20px;
   width: 220px;
   background-color: white;
@@ -143,7 +167,7 @@ export default {
   /* padding: 1px 1px 1px 1px; */
 }
 
-.slot-closed {
+.unit-closed {
   height: 20px;
   width: 220px;
   background-color: grey;
@@ -152,7 +176,7 @@ export default {
   /* padding: 1px 1px 1px 1px; */
 }
 
-.slot-denied {
+.unit-denied {
   height: 20px;
   width: 220px;
   background-color: red;

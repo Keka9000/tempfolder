@@ -1,27 +1,32 @@
 <template>
   <!-- :class='(data.compatible.some(device => {return device === dragged.id || dragged.id == undefined})) ? "slot" : "slot-denied"' -->
-  <v-flex xs12 :id="id" grow pa-0
+  <v-flex xs12 :id="unit_id" grow pa-0
     @click.self="(e) => testhandler(e)"
-    :class='(data.open) ? "slot" : "slot-denied"'
+    class="text-xs-center"
+    :class='(data.open) ? "unit" : "unit-closed"'
   >
+
     <component
       v-if="data.unit"
-      :is="data.unit.name"
+      :data="data.unit"
+      is="example-device"
       @onMouseDown="(e) => onMouseDown(e)"
       @onMouseMove="(e) => onMouseMove(e)"
       @onMouseUp="(e) => onMouseUp(e)"
     />
   </v-flex>
 
-
-
- <!-- <v-flex xs12 grow class="slot">
-   Я слот № {{id}} в 42 стойке
- </v-flex> -->
 </template>
 
 <script>
+
+import ExampleDevice from '@/components/physical/device/example-device'
+
 export default {
+
+  components: {
+    'example-device': ExampleDevice
+  },
 
   props: {
 
@@ -30,7 +35,7 @@ export default {
       default: () => ({})
     },
 
-    id: {
+    unit_id: {
       type: String,
     },
 },
@@ -53,12 +58,13 @@ export default {
 
     testhandler: function (e) {
 
-     return this.data.open ? console.log('slot click.self') : false
+     // return this.data.open ? console.log('slot click.self') : false
+     console.log('slot click.self', this.unit_id, e)
 
     },
 
     onMouseDown: function (e) {
-      // console.log('onMouseDown catch on slot', e)
+      console.log('onMouseDown catch on slot', e)
       this.$emit('onMouseDown', e, this.data.unit)
     },
 

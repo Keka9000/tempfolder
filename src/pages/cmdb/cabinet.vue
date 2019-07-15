@@ -9,6 +9,7 @@
 
             <component
               :is="'cabinet-42'"
+              :data="getActiveDevice.children"
             />
 
           </v-layout>
@@ -21,6 +22,7 @@
 
             <component
               :is="'cabinet-42'"
+              :data="getActiveDevice.children"
             />
 
           </v-layout>
@@ -65,7 +67,7 @@
 
               <v-flex xs5 class="grey">
 
-
+                <!-- {{$store.state.devices.active}} -->
 
               </v-flex>
 
@@ -97,29 +99,48 @@ export default {
 
   props: {},
 
-  data: () => ({
-
-
-
-  }),
+  data: () => ({}),
 
   computed: {
 
     getActiveDevice: function () {
 
+
       return this.$store.getters['getActiveDevice']
+      // return this.$store.state.devices.active
+      // return this.$store.state.active
+
+    },
+
+    getRouterParams: function () {
+
+      return this.$route.params
 
     },
 
   },
 
-  watch: {},
+  watch: {
 
-  created () {},
+
+  },
+
+  created () {
+
+    console.log('cabinet created')
+    // this.cabinet = Object.assign({}, this.cabinet, this.$store.getters['getActiveDevice'])
+    // console.log('cabinet', this.cabinet)
+
+
+  },
 
   mounted () {},
 
-  updated () {},
+  updated () {
+
+    console.log('cabinet updated')
+
+  },
 
   beforeDestroy () {},
 
