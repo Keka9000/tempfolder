@@ -20,13 +20,13 @@
 
 <script>
 
-import ExampleDevice from '@/components/physical/device/example-device'
+// import ExampleDevice from '@/components/physical/device/example-device'
+import DeviceImport from './../../device-import.js'
+
 
 export default {
 
-  components: {
-    'example-device': ExampleDevice
-  },
+  components: DeviceImport,
 
   props: {
 
@@ -46,7 +46,12 @@ export default {
 
   watch: {},
 
-  created () {},
+  created () {
+
+    // let test = DinamicImport
+    // console.log(test)
+
+  },
 
   mounted () {},
 
@@ -60,6 +65,7 @@ export default {
 
      // return this.data.open ? console.log('slot click.self') : false
      console.log('slot click.self', this.unit_id, e)
+     this.$store.dispatch('addSelected', this.data)
 
     },
 

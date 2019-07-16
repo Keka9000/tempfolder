@@ -65,9 +65,9 @@
 
               </v-flex>
 
-              <v-flex xs5 class="grey">
+              <v-flex xs5 v-if="getSelected" class="grey">
 
-                <!-- {{$store.state.devices.active}} -->
+                {{getSelected}}
 
               </v-flex>
 
@@ -107,6 +107,15 @@ export default {
 
 
       return this.$store.getters['getActiveDevice']
+      // return this.$store.state.devices.active
+      // return this.$store.state.active
+
+    },
+
+    getSelected: function () {
+
+
+      return this.$store.getters['getSelected']
       // return this.$store.state.devices.active
       // return this.$store.state.active
 

@@ -2,7 +2,7 @@ const routes = [
 
     {
         path: '/',
-        redirect: 'cmdb',
+        redirect: '/physical',
 
     },
     {

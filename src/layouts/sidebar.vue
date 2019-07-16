@@ -167,7 +167,7 @@ export default {
   created () {
     // this.onResponsiveInverted()
     // window.addEventListener('resize', this.onResponsiveInverted)
-    this.setup()
+    // this.setup()
   },
 
   mounted () {

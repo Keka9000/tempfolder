@@ -52,7 +52,7 @@ import axios from 'axios'
 const $_instanceAxios = axios.create({
 
     // baseURL: $_localhost ? 'http://192.168.50.37:5000/api/' : '/api', //monitoring
-    // baseURL: $_localhost ? 'http://192.168.50.37:3000/api/' : '/api', //cmdb
+    baseURL: $_localhost ? 'http://192.168.50.37:3000/api/' : '/api', //cmdb
 
 });
 
