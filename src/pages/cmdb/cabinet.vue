@@ -7,10 +7,10 @@
 
           <v-layout fill-height class="blue--" justify-space-around align-center ma-0 pa-0 >
 
-            <!-- <component
+            <component
               :is="'cabinet-42'"
               :data="getActiveDevice.children"
-            /> -->
+            />
 
           </v-layout>
 

@@ -7,10 +7,10 @@
 
     </v-layout>
   </v-container> -->
-  <div class="parent-class">
+  <!-- <div ref="unit" class="parent-class"> -->
   <!-- <div style="width: 450px; height: 355px" class="orange"> -->
     <another-device :data="response"/>
-  </div>
+  <!-- </div> -->
 
 </template>
 
@@ -76,12 +76,12 @@ export default {
 
 <style>
 
-.parent-class {
+/* .parent-class {
 
   width: 450px;
   height: 355px;
   background-color: orange;
 
-}
+} */
 
 </style>

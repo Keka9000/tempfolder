@@ -1,4 +1,4 @@
-import camelCase from "lodash/camelCase";
+import camelCase from "lodash.camelcase";
 const requireModule = require.context("./device", false, /\.vue$/); //extract js files inside modules folder
 const modules = {};
 

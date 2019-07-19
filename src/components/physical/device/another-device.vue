@@ -20,10 +20,10 @@ export default {
           class: this.getClass(elem),
           style: this.getStyle(elem),
           on: {
-            // click: this.testClickHandler,
-            // dblclick: this.testDblClickHandler,
-            // mousedown: this.testMouseDownHandler,
-            // mouseup: this.testMouseUpHandler,
+            click: this.testClickHandler,
+            dblclick: this.testDblClickHandler,
+            mousedown: this.testMouseDownHandler,
+            mouseup: this.testMouseUpHandler,
           },
         }
 
@@ -48,13 +48,22 @@ export default {
     let vDom = getData(this.model)
 
     // console.log('this.data', this.data)
-    console.log('test', vDom)
+    // console.log('test', vDom)
 
 
     return createElement(
       'div',
       {
-        style: this.parent,
+        class: 'parent-class',
+        // style: this.parent,
+        style: {
+          width: this.data[0].width * this.scale + 'px',
+          height: this.data[0].height * this.scale + 'px',
+          top: this.data[0].y * this.scale + 'px',
+          left: this.data[0].x * this.scale + 'px',
+          position: 'relative'
+          // position: 'absolute'
+        },
       },
       vDom
     )
@@ -71,6 +80,7 @@ export default {
   },
 
   data: () => ({
+    scale: .6,
     heap: {},
     parent: {
       width: '100%',
@@ -149,6 +159,11 @@ export default {
   computed: {},
 
   created () {
+
+    // console.log('this.parent', this.$parent.$el)
+
+
+
 
     console.log('this.data', this.data)
     this.model = this.parseData(this.data[0].children)
@@ -245,10 +260,10 @@ export default {
 
       let obj = {}
 
-      obj.width = elem.width + 'px'
-      obj.height = elem.height + 'px'
-      obj.top = elem.y + 'px'
-      obj.left = elem.x + 'px'
+      obj.width = elem.width * this.scale + 'px'
+      obj.height = elem.height * this.scale + 'px'
+      obj.top = elem.y * this.scale + 'px'
+      obj.left = elem.x * this.scale + 'px'
       obj.position = elem.cls == 'module' ? 'unset' : 'absolute'
 
       return obj
@@ -266,6 +281,16 @@ export default {
 .testClass {
 
   background-color: red;
+
+
+}
+
+.parent-class {
+
+  background-color: orange;
+  /* width: 450px;
+  height: 355px; */
+  /* transform: scale(.5, .5) */
 
 }
 
