@@ -9,7 +9,7 @@
     <component
       v-if="data.unit"
       :data="data.unit"
-      is="example-device"
+      is="multiplexer"
       @onMouseDown="(e) => onMouseDown(e)"
       @onMouseMove="(e) => onMouseMove(e)"
       @onMouseUp="(e) => onMouseUp(e)"

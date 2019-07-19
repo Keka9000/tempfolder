@@ -67,7 +67,7 @@
               {{n}}
             </v-flex> -->
             <v-flex v-if="active.length">
-              {{active}}
+              <!-- {{active}} -->
             </v-flex>
 
 
@@ -202,7 +202,7 @@ export default {
 
       if (this.$route.meta.sidebar === 'logical') {
         // console.log('this.loadDevices() started')
-        this.loadConnections()
+        // this.loadConnections()
         return
       }
 

@@ -1,51 +1,63 @@
-<!-- <template>
-  <div>
-    <pre>
-      {{model.module}}
-    </pre>
-  </div>
-</template> -->
-
-
 <script>
 export default {
 
 
-  render(createElement) {
+  render: function (createElement) {
 
-    let test = []
-    this.model.slot.forEach(slot => {
-      let tag = 'div'
+    let getData = (arr) => {
 
-      let options = {}
-      options.class = 'testClass'
-      options.style = `width: ${slot.width}px; height: ${slot.height}px; top: ${slot.y}px; left: ${slot.x}px; position: absolute`
+      let vDom = []
 
-      let inner = slot.name
+      arr.forEach(elem => {
 
-      let child = createElement(tag, options, inner)
+        let tag = 'div'
 
-      test.push(child)
-    })
+        let options = {
+          attrs: {
+            id: elem.id,
+          },
+
+          class: this.getClass(elem),
+          style: this.getStyle(elem),
+          on: {
+            // click: this.testClickHandler,
+            // dblclick: this.testDblClickHandler,
+            // mousedown: this.testMouseDownHandler,
+            // mouseup: this.testMouseUpHandler,
+          },
+        }
+
+        let inner = []
+
+        if (elem.children) {
+          let childInner = getData(elem.children)
+          inner.push(childInner)
+        }
+
+
+        let child = createElement(tag, options, inner)
+
+        vDom.push(child)
+
+      })
+      return vDom
+    }
+
+
+    // let vDom = getData(this.model.slot)
+    let vDom = getData(this.model)
+
+    // console.log('this.data', this.data)
+    console.log('test', vDom)
 
 
     return createElement(
       'div',
       {
-        style: "width: 150px; height: 150px; position: absolute",
-        // class: "blue",
+        style: this.parent,
       },
-      // ['kjdncsd', 'dcsdc']
-      [test]
+      vDom
     )
-
-    function getItem (arr) {
-      let a = []
-      forEach.arr(item => {
-        a.push(item)
-      })
-      return a
-    }
 
   },
 
@@ -59,7 +71,13 @@ export default {
   },
 
   data: () => ({
-
+    heap: {},
+    parent: {
+      width: '100%',
+      height: '100%',
+      position: 'relative',
+      display: 'flex',
+    },
     model: {
       slot: [
         {
@@ -67,16 +85,60 @@ export default {
           height: 100,
           width: 100,
           name: 'slot1',
+          cls: 'slot',
           x: 0,
-          y: 0
+          y: 0,
+          children: [
+            {
+              id: 11,
+              height: 50,
+              width: 50,
+              name: 'slot3',
+              cls: 'child',
+              x: 25,
+              y: 25,
+            }
+          ]
         },
         {
           id: 2,
           height: 100,
           width: 100,
           name: 'slot2',
+          cls: 'slot',
           x: 100,
-          y: 100
+          y: 100,
+          children: [
+            {
+              id: 21,
+              height: 50,
+              width: 50,
+              name: 'slot3',
+              cls: 'child',
+              x: 50,
+              y: 50,
+            }
+          ]
+        },
+        {
+          id: 3,
+          height: 100,
+          width: 100,
+          name: 'slot2',
+          cls: 'slot',
+          x: 200,
+          y: 200,
+          children: [
+            {
+              id: 31,
+              height: 50,
+              width: 50,
+              name: 'slot3',
+              cls: 'child',
+              x: 50,
+              y: 50,
+            }
+          ]
         }
       ],
 
@@ -88,74 +150,110 @@ export default {
 
   created () {
 
-    console.log('test parent el', this.$parent.$el)
-
-    // this.data.forEach((item, index) => {
-    //   if(!this.model[item.cls]) {
-    //     this.model[item.cls] = []
-    //   }
-    //   let obj = Object.assign({}, item)
-    //   this.model[item.cls].push(obj)
-    // })
-
-    // this.model = this.parseData(this.data)
-
-
-    // console.log('this.model', this.model)
-
-
+    console.log('this.data', this.data)
+    this.model = this.parseData(this.data[0].children)
 
   },
 
-  mounted () {
-
-  },
-  // links?cls=device&id=3&null
-
+  mounted () {},
 
   methods: {
 
+    testClickHandler: function (e) {
+
+      console.log('click ', e.target.id)
+
+    },
+    testDblClickHandler: function (e) {
+
+      console.log('dblClick ', e.target.id)
+
+    },
+
+    testMouseDownHandler: function (e) {
+
+      console.log('MouseDown ', e.target.id)
+
+    },
+
+    testMouseUpHandler: function (e) {
+
+      console.log('MouseUp ', e.target.id)
+
+    },
+
+    heapData: function (arr) {
+
+
+      arr.forEach(item => {
+
+        if(item.children && item.children.length) {
+
+          this.heapData(item.children)
+
+        }
+
+        this.heap[item.cls + item.id] = item
+
+      })
+
+    },
+
     parseData: function (arr) {
-      let structure = {}
 
-      arr.forEach((item, index) => {
+      this.heapData(arr)
 
-        if(!structure[item.cls]) {
-          structure[item.cls] = []
-        }
+      console.log('heap', this.heap)
 
-        let obj = Object.assign({}, item)
-
+      arr.map(item => {
+        // console.log('parseData started', item)
         if(item.children && item.children.length > 0) {
-
-          // console.log('item.children && item.children.length > 0')
-
-          let itemChildren = this.parseData(item.children)
-
-          // console.log('itemChildren', itemChildren)
-
-          obj.children = itemChildren
-
+          item.children.forEach(child => {
+            if(!child.width) {
+              child.x = item.x
+              child.y = item.y
+              child.height = item.width
+              child.width = item.height
+            }
+            if (item.orientation) {
+              child.orient = 'rotate-' + item.orientation
+            }
+          })
         }
 
-        structure[item.cls].push(obj)
       })
 
-      return structure
-
-    },
-
-    testGet: function (arr) {
-
-      arr.forEach(slot => {
-        let obj = {}
-        ob
-      })
+      return arr
 
     },
 
 
+    getClass: function (elem) {
 
+      let $_class = []
+
+      $_class.push(elem.cls)
+      if(elem.orient) {
+        $_class.push(elem.orient)
+      }
+
+      return $_class
+
+    },
+
+    getStyle: function (elem) {
+
+      let obj = {}
+
+      obj.width = elem.width + 'px'
+      obj.height = elem.height + 'px'
+      obj.top = elem.y + 'px'
+      obj.left = elem.x + 'px'
+      obj.position = elem.cls == 'module' ? 'unset' : 'absolute'
+
+      return obj
+
+    },
 
   },
 
@@ -164,10 +262,43 @@ export default {
 
 <style lang="css" scoped>
 
+
 .testClass {
 
   background-color: red;
 
 }
+
+.slot {
+
+  background-color: green;
+
+}
+
+.subslot {
+
+  background-color: black;
+
+}
+
+.module {
+
+  background-color: blue;
+
+}
+
+  .rotate-1 {
+
+    transform-origin: 0 0;
+    transform: rotate(90deg)translate(0, -100%);
+
+  }
+
+.socket {
+
+  background-color: purple;
+
+}
+
 
 </style>

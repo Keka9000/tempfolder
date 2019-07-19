@@ -3,11 +3,28 @@
 
     <div class="cabinet red--" >
       <v-flex v-for="(key, index) in getUnitPosition" :key="key">
-        <component
+
+        <v-flex xs12 :id="key" grow pa-0
+          @click.self="(e) => testhandler(e)"
+          class="text-xs-center"
+          :class='(getUnitData[key].open) ? "unit" : "unit-closed"'
+        >
+
+          <!-- <component
+            v-if="getUnitData[key].unit"
+            :data="getUnitData[key].unit"
+            is="multiplexer"
+            @onMouseDown="(e) => onMouseDown(e)"
+            @onMouseMove="(e) => onMouseMove(e)"
+            @onMouseUp="(e) => onMouseUp(e)"
+          /> -->
+        </v-flex>
+
+        <!-- <component
           :is="'unit-normal'"
           :unit_id="key"
           :data="getUnitData[key]"
-        />
+        /> -->
         <!-- {{getUnitDevice}} -->
       </v-flex>
     </div>
@@ -26,15 +43,13 @@
 
 <script>
 
-import UnitNormal from './unit-normal'
+// import UnitNormal from './unit-normal'
+import DeviceImport from './../../device-import.js'
 
 export default {
 
-  components: {
+  components: DeviceImport,
 
-    'unit-normal': UnitNormal
-
-  },
 
   props: {
 
@@ -81,7 +96,7 @@ export default {
 
   created () {
 
-    console.log('cabinet-42 created')
+    console.log('cabinet-42 created', this.data)
     this.setup()
 
 
@@ -120,7 +135,26 @@ export default {
 
     },
 
+    testhandler: function (e) {
 
+     // return this.data.open ? console.log('slot click.self') : false
+     console.log('slot click.self', e.target.id, e)
+     // this.$store.dispatch('addSelected', this.data)
+
+    },
+
+    onMouseDown: function (e) {
+      console.log('onMouseDown catch on slot', e)
+      // this.$emit('onMouseDown', e, this.data.unit)
+    },
+
+    onMouseMove: function (e) {
+      // this.$emit('onMouseMove', e)
+    },
+
+    onMouseUp: function (e) {
+      // this.$emit('onMouseUp', e, this.data.unit, this.data.id)
+    },
 
   },
 
