@@ -168,6 +168,20 @@ export default {
     // this.onResponsiveInverted()
     // window.addEventListener('resize', this.onResponsiveInverted)
     // this.setup()
+
+    // this.$http.get('links?heap&only=socket').then((response) => {
+    //
+    //   if (response) {
+    //
+    //     console.log('loadActivePorts', response)
+    //     // commit('ADD_ACTIVE_PORTS', response.data)
+    //
+    //   }
+    //
+    // })
+
+
+
   },
 
   mounted () {
@@ -208,8 +222,9 @@ export default {
 
     },
 
-    loadConnections: function () {
-      console.log('this.loadConnections() started')
+    loadActivePorts: function () {
+      console.log('this.loadActivePorts() started')
+      this.$store.dispatch('loadActivePorts')
     },
     // ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
     // onResponsiveInverted () {
