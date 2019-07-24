@@ -1,21 +1,20 @@
 <script>
 export default {
 
+
   render: function (createElement) {
 
     let getData = (arr) => {
-
+      // console.log('ARR', arr)
       let vDom = []
 
       arr.forEach(elem => {
 
-        if(elem.cls == 'port') return
-        
         let tag = 'div'
 
         let options = {
           attrs: {
-            id: elem.cls + elem.id,
+            id: elem.id,
           },
 
           class: this.getClass(elem),
@@ -44,17 +43,21 @@ export default {
       return vDom
     }
 
+
+    // let vDom = getData(this.model.slot)
     let vDom = getData(this.getModel)
+
+    let gm = this.getModel
+
+    // console.log('this.data', this.data)
+    // console.log('test', vDom)
+    // console.log('gm', gm)
 
     return createElement(
       'div',
       {
         class: 'parent-class',
-
-        attrs: {
-          id: this.data.cls + this.data.id
-        },
-
+        // style: this.parent,
         style: {
           width: this.data.width * this.scale + 'px',
           height: this.data.height * this.scale + 'px',
@@ -64,11 +67,6 @@ export default {
           // position: 'relative'
           position: 'absolute'
         },
-
-        on: {
-          'click': this.testClickHandler
-        },
-
       },
       vDom
     )
@@ -173,18 +171,26 @@ export default {
 
     },
 
+    // getBackground: function (data) {
+    //
+    //   // `url(http://192.168.50.37:3000/template/${this.data.cls}/${this.data.template}/${this.data.mount}.png)`
+    //   let path = 'http://192.168.50.37:3000/template/' + this.data.cls + '/' + this.data.template + '/' + this.data.mount + '.png'
+    //   let url = path.replace(/\s/g, '%20')
+    //   console.log('url', url)
+    //   return url
+    //
+    // },
+
   },
 
   created () {
 
-    // console.log('this.data created', this.data)
-    this.model = this.parseData(this.data.children)
+    // console.log('this.parent', this.$parent.$el)
 
-  },
 
-  updated () {
 
-    // console.log('this.data updated', this.data)
+
+    console.log('this.data', this.data)
     this.model = this.parseData(this.data.children)
 
   },
@@ -196,18 +202,11 @@ export default {
     testClickHandler: function (e) {
 
       if (event.target !== event.currentTarget) return
-      console.log('testClickHandler ', e.target.id, e.target.className, e)
-      if(e.target.className == 'parent-class') {
-        // this.$store.dispatch('addSelected', this.data)
-        this.$emit('select', this.data)
-      } else {
-        console.log('from heap ', this.heap[e.target.id])
-        // this.$store.dispatch('addSelected', this.heap[e.target.id])
-        this.$emit('select', this.heap[e.target.id])
-      }
+      console.log('click ', e.target.id)
+
     },
     testDblClickHandler: function (e) {
-      console.log('dblClick')
+
       if (event.target !== event.currentTarget) return
       console.log('dblClick ', e.target.id)
 
@@ -229,15 +228,17 @@ export default {
 
     getBackground: function (data) {
 
-      let side = data.cls == 'device' ? 'front' : 'image'
-      // let path = 'http://192.168.50.37:3000/template/' + data.cls + '/' + data.template + '/' + side + '.png'
-      let path = this.$baseURL + '/template/' + data.cls + '/' + data.template + '/' + side + '.png'
+      // `url(http://192.168.50.37:3000/template/${this.data.cls}/${this.data.template}/${this.data.mount}.png)`
+      let side = data.mount ? data.mount : 'image'
+      let path = 'http://192.168.50.37:3000/template/' + data.cls + '/' + data.template + '/' + side + '.png'
       let url = path.replace(/\s/g, '%20')
+      // console.log('url', url)
       return url
 
     },
 
     heapData: function (arr) {
+
 
       arr.forEach(item => {
 
@@ -257,9 +258,11 @@ export default {
 
       this.heapData(arr)
 
-      // console.log('heap', this.heap)
+      console.log('heap', this.heap)
 
       arr.map(item => {
+        // console.log('parseData started', item)
+
 
         if(item.children && item.children.length > 0) {
           item.children.forEach(child => {
@@ -302,10 +305,6 @@ export default {
         $_class.push('broken')
       }
 
-      if(elem.is_used) {
-        $_class.push('used')
-      }
-
       return $_class
 
     },
@@ -323,8 +322,6 @@ export default {
 
       if(elem.cls === 'module' || elem.cls === 'submodule') {
         obj.backgroundImage = `url(${this.getBackground(elem)})`
-        obj.backgroundSize = '100% 100%'
-
       }
 
       return obj
@@ -352,8 +349,6 @@ export default {
   /* width: 450px;
   height: 355px; */
   /* transform: scale(.5, .5) */
-  opacity: .8;
-  z-index: 2;
 
 }
 
@@ -372,17 +367,8 @@ export default {
 .module {
 
   /* background-color: blue; */
-  opacity: .6
 
 }
-
-  :hover {
-
-    /* box-sizing: content-box;
-    border: solid 1px #F7941D; */
-    opacity: 1
-
-  }
 
   .rotate-1 {
 
@@ -414,22 +400,6 @@ export default {
   /* background-color: purple; */
 
 }
-
-  .used {
-
-    box-sizing: content-box;
-    border: solid 1px #F7941D;
-    opacity: 1;
-
-  }
-
-  :hover {
-
-    background-color: #F7941D;
-
-  }
-
-
 
 
 </style>

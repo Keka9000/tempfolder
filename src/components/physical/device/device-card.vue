@@ -10,7 +10,7 @@ export default {
       arr.forEach(elem => {
 
         if(elem.cls == 'port') return
-        
+
         let tag = 'div'
 
         let options = {
@@ -35,7 +35,6 @@ export default {
           inner.push(childInner)
         }
 
-
         let child = createElement(tag, options, inner)
 
         vDom.push(child)
@@ -58,11 +57,13 @@ export default {
         style: {
           width: this.data.width * this.scale + 'px',
           height: this.data.height * this.scale + 'px',
-          top: this.data.y * this.scale + 'px',
-          left: this.data.x * this.scale + 'px',
+          top: '0px',
+          left: '0px',
+          // top: this.data.y * this.scale + 'px',
+          // left: this.data.x * this.scale + 'px',
           backgroundImage: `url(${this.getBackground(this.data)})`,
-          // position: 'relative'
-          position: 'absolute'
+          position: 'relative'
+          // position: 'absolute'
         },
 
         on: {
@@ -76,88 +77,22 @@ export default {
   },
 
   props: {
-
     data: {
       type: Object,
       default: () => ({})
     },
-
   },
 
   data: () => ({
+
     scale: 1,
     heap: {},
     parent: {
       width: '100%',
       height: '100%',
       position: 'relative',
-      // display: 'flex',
     },
-    model: {
-      slot: [
-        {
-          id: 1,
-          height: 100,
-          width: 100,
-          name: 'slot1',
-          cls: 'slot',
-          x: 0,
-          y: 0,
-          children: [
-            {
-              id: 11,
-              height: 50,
-              width: 50,
-              name: 'slot3',
-              cls: 'child',
-              x: 25,
-              y: 25,
-            }
-          ]
-        },
-        {
-          id: 2,
-          height: 100,
-          width: 100,
-          name: 'slot2',
-          cls: 'slot',
-          x: 100,
-          y: 100,
-          children: [
-            {
-              id: 21,
-              height: 50,
-              width: 50,
-              name: 'slot3',
-              cls: 'child',
-              x: 50,
-              y: 50,
-            }
-          ]
-        },
-        {
-          id: 3,
-          height: 100,
-          width: 100,
-          name: 'slot2',
-          cls: 'slot',
-          x: 200,
-          y: 200,
-          children: [
-            {
-              id: 31,
-              height: 50,
-              width: 50,
-              name: 'slot3',
-              cls: 'child',
-              x: 50,
-              y: 50,
-            }
-          ]
-        }
-      ],
-
-    },
+    model: {},
     side: 'front',
 
   }),
@@ -166,10 +101,11 @@ export default {
 
     getModel: function () {
 
-      return this.model.filter(item => {
-        // console.log('SIDE', item.side)
-        return item.side == this.side
-      })
+      // return this.model.filter(item => {
+      //   // console.log('SIDE', item.side)
+      //   return item.side == this.side
+      // })
+      return this.model
 
     },
 
@@ -189,8 +125,6 @@ export default {
 
   },
 
-  mounted () {},
-
   methods: {
 
     testClickHandler: function (e) {
@@ -199,38 +133,19 @@ export default {
       console.log('testClickHandler ', e.target.id, e.target.className, e)
       if(e.target.className == 'parent-class') {
         // this.$store.dispatch('addSelected', this.data)
-        this.$emit('select', this.data)
+        // this.$emit('select', this.data)
       } else {
         console.log('from heap ', this.heap[e.target.id])
         // this.$store.dispatch('addSelected', this.heap[e.target.id])
-        this.$emit('select', this.heap[e.target.id])
+        // this.$emit('select', this.heap[e.target.id])
       }
-    },
-    testDblClickHandler: function (e) {
-      console.log('dblClick')
-      if (event.target !== event.currentTarget) return
-      console.log('dblClick ', e.target.id)
-
-    },
-
-    testMouseDownHandler: function (e) {
-
-      if (event.target !== event.currentTarget) return
-      console.log('MouseDown ', e.target.id)
-
-    },
-
-    testMouseUpHandler: function (e) {
-
-      if (event.target !== event.currentTarget) return
-      console.log('MouseUp ', e.target.id)
-
     },
 
     getBackground: function (data) {
 
+      if(data.template == undefined) return
+
       let side = data.cls == 'device' ? 'front' : 'image'
-      // let path = 'http://192.168.50.37:3000/template/' + data.cls + '/' + data.template + '/' + side + '.png'
       let path = this.$baseURL + '/template/' + data.cls + '/' + data.template + '/' + side + '.png'
       let url = path.replace(/\s/g, '%20')
       return url
@@ -256,8 +171,6 @@ export default {
     parseData: function (arr) {
 
       this.heapData(arr)
-
-      // console.log('heap', this.heap)
 
       arr.map(item => {
 
@@ -333,10 +246,11 @@ export default {
 
   },
 
+
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 
 
 .testClass {
@@ -352,37 +266,41 @@ export default {
   /* width: 450px;
   height: 355px; */
   /* transform: scale(.5, .5) */
-  opacity: .8;
+  border: solid 1px transparent;
+  opacity: 1;
   z-index: 2;
 
 }
+  /* :hover {
+
+    box-sizing: border-box;
+    border: solid 1px #F7941D;
+
+  } */
 
 .slot {
 
+  border: solid 1px transparent;
   /* background-color: green; */
 
 }
 
 .subslot {
 
+  border: solid 1px transparent;
   /* background-color: black; */
 
 }
 
 .module {
 
+  border: solid 1px transparent;
   /* background-color: blue; */
-  opacity: .6
+  opacity: 1
 
 }
 
-  :hover {
 
-    /* box-sizing: content-box;
-    border: solid 1px #F7941D; */
-    opacity: 1
-
-  }
 
   .rotate-1 {
 
@@ -423,11 +341,6 @@ export default {
 
   }
 
-  :hover {
-
-    background-color: #F7941D;
-
-  }
 
 
 

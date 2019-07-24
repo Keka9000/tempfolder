@@ -30,6 +30,7 @@
           <v-layout column justify-start align-start style="overflow-x: hidden !important">
 
             <v-treeview
+              style="cursor: pointer"
               v-model="tree"
               :open="open"
               :items="getDevices"
@@ -151,11 +152,11 @@ export default {
 
         if(!newVal.length) {
           console.log('мимо')
-          this.$store.dispatch('activeDevice', newVal[0])
+          this.$store.dispatch('activeCabinet', newVal[0])
           this.$router.push('/physical')
         } else {
           console.log('newval', newVal[0].cls, newVal[0].id)
-          this.$store.dispatch('activeDevice', newVal[0])
+          this.$store.dispatch('activeCabinet', newVal[0])
           this.$router.push('/physical/' + newVal[0].cls)
 
         }
@@ -223,8 +224,8 @@ export default {
     },
 
     loadActivePorts: function () {
-      console.log('this.loadActivePorts() started')
-      this.$store.dispatch('loadActivePorts')
+      // console.log('this.loadActivePorts() started')
+      // this.$store.dispatch('loadActivePorts')
     },
     // ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
     // onResponsiveInverted () {

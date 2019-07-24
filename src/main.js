@@ -47,12 +47,15 @@ const $_localhost = Boolean(window.location.hostname === 'localhost' ||
 Vue.prototype.$localhost = $_localhost
 
 
+const baseURL = 'http://192.168.50.37:3000'//cmdb
+Vue.prototype.$baseURL = baseURL
+
 import axios from 'axios'
 
 const $_instanceAxios = axios.create({
 
     // baseURL: $_localhost ? 'http://192.168.50.37:5000/api/' : '/api', //monitoring
-    baseURL: $_localhost ? 'http://192.168.50.37:3000/api/' : '/api', //cmdb
+    baseURL: $_localhost ? baseURL + '/api/' : '/api', //cmdb
 
 });
 
@@ -72,7 +75,7 @@ $_instanceAxios.interceptors.response.use((response) => response, (error) => {
 Vue.prototype.$http = $_instanceAxios
 
 
-import VueWebsocket from 'vue-websocket'
+// import VueWebsocket from 'vue-websocket'
 // Vue.use(VueWebsocket, "ws://192.168.50.37:3000");
 
 

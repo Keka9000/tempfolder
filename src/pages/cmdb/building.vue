@@ -3,7 +3,7 @@
     <!-- <v-layout column class="cabinet" ma-0 justify-start align-start> -->
       <!-- <v-flex v-for="device in getDevices" class="cabinet"> -->
       <div class="cabinet">
-        <another-device v-for="device in getDevices" :data="device"/>
+        <another-device v-for="(device, index) in getDevices" :key="index" :data="device"/>
       </div>
       <!-- </v-flex> -->
 
@@ -59,9 +59,9 @@ export default {
     // console.log('response', this.response )
     // console.log('cabinet', data[0].children[0].children[0].children[0] )
 
-    let el = document.getElementById('app')
-    let size = el.getBoundingClientRect()
-    console.log('size', size )
+    // let el = document.getElementById('app')
+    // let size = el.getBoundingClientRect()
+    // console.log('size', size )
 
 
 
