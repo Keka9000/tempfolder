@@ -22,10 +22,10 @@
         <div
           v-if="!unit[key].open"
           :id="key"
-          class="unit text-xs-center display-1"
-          @click="(payload) => unitClickHandler(payload)"
+          class="unit text-xs-center display-1 grey lighten-3"
+          @click=""
         >
-          closed
+          <!-- closed -->
         </div>
 
         <v-flex class="red-- headline test-xs-center" ml-3 pt-2>
@@ -37,24 +37,6 @@
     </v-layout>
 
   </div>
-
-
-
-  <!-- <v-flex class="cabinet">
-    <another-device v-if="getDevices" v-for="(device, index) in getDevices" :key="device.name"
-      :data="device"
-      @select="(payload) => deviceSelectHandler(payload)"
-    />
-
-    <div v-if="unit" v-for="(key, index) in getUnitPosition" :key="key"
-      :id="key"
-      class="unit text-xs-center display-1"
-      @click="(payload) => unitClickHandler(payload)"
-    >
-      добавить устройство
-    </div>
-
-  </v-flex> -->
 
 </template>
 
@@ -110,13 +92,22 @@ export default {
 
       let keys = Object.keys(this.unit).slice().reverse();
 
+
       return keys
 
     },
 
   },
 
-  watch: {},
+  watch: {
+
+    data (newVal) {
+
+      this.setup()
+
+    },
+
+  },
 
   created () {
 
@@ -130,7 +121,7 @@ export default {
   updated () {
 
     console.log('cabinet updated')
-
+    // this.setup()
   },
 
   beforeDestroy () {},
@@ -170,9 +161,9 @@ export default {
 
           let count = Math.ceil( device.height / 45 )
           console.log('big device', device.name, count)
-          // for(let i = device.position - count; i = device.position; i++) {
-          //   this.unit[i].open = false
-          // }
+          for(let i = device.position; i > device.position - count; i--) {
+            this.unit[i].open = false
+          }
 
         }
 

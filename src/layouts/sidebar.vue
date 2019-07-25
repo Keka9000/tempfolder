@@ -31,6 +31,7 @@
 
             <v-treeview
               style="cursor: pointer"
+              hoverable---
               v-model="tree"
               :open="open"
               :items="getDevices"
@@ -52,7 +53,7 @@
                 </v-icon>
               </template>
             </v-treeview>
-
+            <!-- {{active}} -->
           </v-layout>
         </v-container>
 
@@ -122,7 +123,7 @@ export default {
     responsive: false,
 
     open: ['public'],
-
+    // active: this.getDevices[0],
     active: [],
     active_link: {
       building: 'location',
@@ -130,6 +131,9 @@ export default {
       device: 'device'
       // cabinet: 'physical/cabinet',
       // device: 'physical/device'
+    },
+    rules: {
+      device: payload => payload.cls != 'device',
     },
 
     tree: [],
@@ -151,13 +155,19 @@ export default {
     active: function (newVal) {
 
         if(!newVal.length) {
-          console.log('мимо')
-          this.$store.dispatch('activeCabinet', newVal[0])
-          this.$router.push('/physical')
+          console.log('мимо', newVal.length)
+          this.active.push(this.getDevices[0])
+          this.$router.push('/')
         } else {
           console.log('newval', newVal[0].cls, newVal[0].id)
-          this.$store.dispatch('activeCabinet', newVal[0])
-          this.$router.push('/physical/' + newVal[0].cls)
+
+          if (newVal[0].cls == 'cabinet') {
+            this.$store.dispatch('cabinet', newVal[0])
+            this.$router.push('/physical/' + newVal[0].cls)
+          } else {
+            this.$store.dispatch('selected', newVal[0])
+            this.$router.push('/physical/' + newVal[0].cls)
+          }
 
         }
 
@@ -169,6 +179,8 @@ export default {
     // this.onResponsiveInverted()
     // window.addEventListener('resize', this.onResponsiveInverted)
     // this.setup()
+
+
 
     // this.$http.get('links?heap&only=socket').then((response) => {
     //
@@ -185,9 +197,16 @@ export default {
 
   },
 
+  beforeMounted () {
+
+
+
+  },
+
   mounted () {
-    // this.onResponsiveInverted()
-    // window.addEventListener('resize', this.onResponsiveInverted)
+
+    this.active.push(this.getDevices[0])
+
   },
 
   updated () {
@@ -205,6 +224,12 @@ export default {
       console.log('payload', payload)
 
     },
+
+    // treeFilter: function (payload) {
+    //
+    //   payload => payload.length >= 8 || 'Min 8 characters',
+    //
+    // },
 
     setup: function () {
 

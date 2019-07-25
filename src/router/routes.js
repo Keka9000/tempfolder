@@ -51,6 +51,28 @@ const routes = [
     //
             {
               // path: '/physical/location/:location_id(\\d+)',
+              path: '/physical/zone',
+              name: 'zone',
+              meta: {
+                sidebar: 'physical',
+                // requiresAuth: true
+              },
+              component: () => import('@/pages/cmdb/location'),
+            },
+
+            {
+              // path: '/physical/location/:location_id(\\d+)',
+              path: '/physical/facility',
+              name: 'facility',
+              meta: {
+                sidebar: 'physical',
+                // requiresAuth: true
+              },
+              component: () => import('@/pages/cmdb/location'),
+            },
+
+            {
+              // path: '/physical/location/:location_id(\\d+)',
               path: '/physical/building',
               name: 'building',
               meta: {

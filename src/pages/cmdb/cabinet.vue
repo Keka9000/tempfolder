@@ -90,16 +90,29 @@
 
               </v-flex>
 
-              <v-flex xs5 v-if="getSelected" >
+              <v-divider></v-divider>
+
+              <v-flex xs6 v-if="getSelected" py-2>
 
                 <!-- {{getSelected}} -->
-                <component
-                  is="device-card"
-                  :data="getSelected"
-                />
+                <v-layout row fill-height class="yellow--">
+
+                  <v-flex xs6 class="pink--" >
+                    <component
+                      is="device-card"
+                      :data="getSelected"
+                    />
+                  </v-flex>
+
+                  <v-flex xs6 class="cyan--" >
+
+                  </v-flex>
+
+                </v-layout>
+
 
               </v-flex>
-
+              <!-- {{getSelected}} -->
 
             </v-layout>
 
@@ -158,13 +171,17 @@ export default {
     selectedSlot: {
       cabinetSide:null,
       unitId: null
-    }
+    },
+
+    selectedDevice: null,
 
   }),
 
   computed: {
 
     getActiveCabinet: function () {
+
+      this.selectedDevice = null
 
       let devices = this.$store.getters['getActiveCabinet']
 
@@ -184,9 +201,9 @@ export default {
     getSelected: function () {
 
 
-      return this.$store.getters['getSelected']
+      // return this.$store.getters.getSelected()
       // return this.$store.state.devices.active
-      // return this.$store.state.active
+      return this.selectedDevice
 
     },
 
@@ -195,9 +212,6 @@ export default {
       return this.selectedSlot
 
     },
-
-
-
 
   },
 
@@ -209,9 +223,6 @@ export default {
   created () {
 
     console.log('cabinet page created')
-    // this.cabinet = Object.assign({}, this.cabinet, this.$store.getters['getActiveDevice'])
-    // console.log('cabinet', this.cabinet)
-
 
   },
 
@@ -244,8 +255,8 @@ export default {
 
     deviceSelectHandler: function (payload) {
 
-      this.$store.dispatch('addSelected', payload)
-
+      // this.$store.dispatch('selected', payload)
+      this.selectedDevice = payload
     }
 
   },
