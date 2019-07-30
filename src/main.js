@@ -79,6 +79,14 @@ Vue.prototype.$http = $_instanceAxios
 // Vue.use(VueWebsocket, "ws://192.168.50.37:3000");
 
 
+import CBridge from 'upkmbridge'
+const $_bridge = new CBridge()
+// await bridge.connect('http://192.168.50.38', '1', '2')
+
+
+Vue.prototype.$bridge = $_bridge
+
+
 Vue.config.productionTip = false
 
 new Vue({

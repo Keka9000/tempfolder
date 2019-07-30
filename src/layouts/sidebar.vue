@@ -36,6 +36,7 @@
               :open="open"
               :items="getDevices"
               :active.sync="active"
+              item-disabled="disabled"
               activatable
               item-key="name"
               return-object
@@ -133,7 +134,7 @@ export default {
       // device: 'physical/device'
     },
     rules: {
-      device: payload => payload.cls != 'device',
+      device: (payload) => {payload.cls != 'device'},
     },
 
     tree: [],
@@ -144,7 +145,10 @@ export default {
 
     getDevices: function () {
 
-      return this.$store.getters['getDevices']
+      let tree = this.$store.getters['getDevices']
+      // let arr = this.treeFilter(tree)
+
+      return tree
 
     },
 
@@ -159,7 +163,7 @@ export default {
           this.active.push(this.getDevices[0])
           this.$router.push('/')
         } else {
-          console.log('newval', newVal[0].cls, newVal[0].id)
+          console.log('newval', newVal[0].cls, newVal[0].id, newVal[0],)
 
           if (newVal[0].cls == 'cabinet') {
             this.$store.dispatch('cabinet', newVal[0])
@@ -192,7 +196,9 @@ export default {
     //   }
     //
     // })
-
+    // let tree_ = this.$store.getters['getDevices']
+    // let test = this.treeFilter(tree_)
+    // console.log('test', test)
 
 
   },
@@ -225,11 +231,28 @@ export default {
 
     },
 
-    // treeFilter: function (payload) {
-    //
-    //   payload => payload.length >= 8 || 'Min 8 characters',
-    //
-    // },
+    treeFilter: function (payload) {
+
+      function seek (arr) {
+
+        let newArr = arr.map(item => {
+
+          if(item.children && item.children.length > 0) {
+            // if(item.cls == 'device') return
+            seek(item.children)
+          }
+          if(item.cls == 'cabinet') {
+            item.children = []
+          }
+          return item
+        })
+        return newArr
+      }
+      return seek(payload)
+      // console.log('arr', arr)
+
+
+    },
 
     setup: function () {
 
