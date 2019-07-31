@@ -4,14 +4,19 @@
       <v-flex xs3 class="yellow" pa-1>
         <v-layout fill-height class="white" ma-0>
           <v-flex xs8 class="blue">
+            <v-layout column>
+              <v-flex xs12
+                v-for="(field, index) in getMeta.fields"
+                :key="index"
+              >
+                <span class="title font-weight-medium font-condensend">{{field.name + ': '}}{{getData[field.name]}}</span>
+              </v-flex>
 
+            </v-layout>
           </v-flex>
 
           <v-flex xs4 class="blue lighten-3">
-            <v-layout column>
-              
 
-            </v-layout>
           </v-flex>
 
         </v-layout>

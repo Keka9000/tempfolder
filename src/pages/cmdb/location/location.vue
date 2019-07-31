@@ -30,26 +30,27 @@
         <v-layout align-baseline>
 
           <span v-if="model.show !='common'" class="subheading font-weight-regular">Локация создается в:</span>
-          <v-app-bar
+          <!-- <v-app-bar
             color="deep-purple accent-4"
             dense
             dark
           >
-            <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-            <!-- <v-toolbar-title>Page title</v-toolbar-title> -->
+            <v-toolbar-title>Page title</v-toolbar-title>
 
-            <!-- <v-spacer></v-spacer> -->
+            <v-spacer></v-spacer>
 
             <v-btn
               v-for="(crumb, index) in getCrumbs"
+              :key="index"
             >
               {{crumb.name}}
             </v-btn>
 
 
-          </v-app-bar>
-          <!-- <v-breadcrumbs :items="getCrumbs">
+          </v-app-bar> -->
+          <v-breadcrumbs :items="getCrumbs">
             <template v-slot:item="props">
               <v-flex
                 class="crumbs subheading font-weight-regular text-uppercase"
@@ -58,7 +59,7 @@
                 {{ props.item.name }}
               </v-flex>
             </template>
-          </v-breadcrumbs> -->
+          </v-breadcrumbs>
 
           <!-- <v-chip
             v-for="(crumb, index) in getCrumbs"

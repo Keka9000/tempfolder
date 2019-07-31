@@ -154,7 +154,7 @@ export default {
     addUnitStatus: function () {
 
       if(!this.data.children) return
-
+      console.log('addUnitStatus children', this.data.children)
       this.data.children.forEach(device => {
 
         this.unit[device.position].open = false
