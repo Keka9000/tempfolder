@@ -183,26 +183,14 @@ export default {
 
       this.selectedDevice = null
 
-      let devices = this.$store.getters['getActiveCabinet']
+      let devices = this.$merge([], this.$store.getters['getActiveCabinet'])
 
       return devices
-      // if (devices) {
-      //
-      //   return devices.children.filter(device => {
-      //
-      //     return device.mount == this.side
-      //
-      //   })
-      //
-      // }
 
     },
 
     getSelected: function () {
 
-
-      // return this.$store.getters.getSelected()
-      // return this.$store.state.devices.active
       return this.selectedDevice
 
     },
@@ -215,10 +203,7 @@ export default {
 
   },
 
-  watch: {
-
-
-  },
+  watch: {},
 
   created () {
 
@@ -238,11 +223,7 @@ export default {
 
   methods: {
 
-    setup: function () {
-
-      // let cabinet = this.$store.getters['getActiveCabinet']
-      // console.log('cabinet page data', cabinet)
-    },
+    setup: function () {},
 
     deviceAddHandler: function (payload) {
       // console.log('addDevice started')
@@ -255,7 +236,6 @@ export default {
 
     deviceSelectHandler: function (payload) {
 
-      // this.$store.dispatch('selected', payload)
       this.selectedDevice = payload
     }
 

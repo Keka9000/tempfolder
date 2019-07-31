@@ -32,9 +32,8 @@
             <v-treeview
               style="cursor: pointer"
               hoverable---
-              v-model="tree"
               :open="open"
-              :items="getDevices"
+              :items="getTree"
               :active.sync="active"
               item-disabled="disabled"
               activatable
@@ -66,9 +65,6 @@
 
           <v-layout column fill-height >
 
-            <!-- <v-flex v-for="(n, index) in 30" :key="index" class="orange---">
-              {{n}}
-            </v-flex> -->
             <v-flex v-if="active.length">
               <!-- {{active}} -->
             </v-flex>
@@ -101,54 +97,19 @@ export default {
   },
 
   data: () => ({
-    // logo: require('@/assets/img/redditicon.png'),
-    links: [
-      {
-        to: '/physical',
-        // icon: 'mdi-view-dashboard',
-        text: 'Физические'
-      },
-      {
-        // to: '/dashboard/user-profile',
-        to: '/schema',
-        // icon: 'mdi-account',
-        text: 'Схемы'
-      },
-      {
-        // to: '/dashboard/table-list',
-        to: '/alarm-log',
-        // icon: 'mdi-clipboard-outline',
-        text: 'Журнал событий'
-      },
-    ],
-    responsive: false,
 
     open: ['public'],
-    // active: this.getDevices[0],
-    active: [],
-    active_link: {
-      building: 'location',
-      cabinet: 'cabinet',
-      device: 'device'
-      // cabinet: 'physical/cabinet',
-      // device: 'physical/device'
-    },
-    rules: {
-      device: (payload) => {payload.cls != 'device'},
-    },
-
     tree: [],
-    items: []
+    items: [],
+    active: [],
+
   }),
 
   computed: {
 
-    getDevices: function () {
+    getTree: function () {
 
-      let tree = this.$store.getters['getDevices']
-      // let arr = this.treeFilter(tree)
-
-      return tree
+      return this.tree
 
     },
 
@@ -158,21 +119,21 @@ export default {
 
     active: function (newVal) {
 
-        if(!newVal.length) {
-          console.log('мимо', newVal.length)
-          this.active.push(this.getDevices[0])
+        if(this.tree.length < 1) return
+        if (!newVal.length) {
+          console.log('!active', newVal)
+          this.active.push(this.tree[0])
           this.$router.push('/')
-        } else {
-          console.log('newval', newVal[0].cls, newVal[0].id, newVal[0],)
-
-          if (newVal[0].cls == 'cabinet') {
-            this.$store.dispatch('cabinet', newVal[0])
-            this.$router.push('/physical/' + newVal[0].cls)
-          } else {
-            this.$store.dispatch('selected', newVal[0])
-            this.$router.push('/physical/' + newVal[0].cls)
-          }
-
+        }
+        if (newVal[0].cls == 'cabinet') {
+          console.log('active cabinet', newVal)
+          this.$store.dispatch('activeCabinet', newVal[0])
+          this.$router.push('/physical/' + newVal[0].cls)
+        }
+        else {
+          console.log('active selected', newVal)
+          this.$store.dispatch('activeLocation', newVal[0])
+          this.$router.push('/physical/' + newVal[0].cls)
         }
 
     },
@@ -180,49 +141,19 @@ export default {
   },
 
   created () {
-    // this.onResponsiveInverted()
-    // window.addEventListener('resize', this.onResponsiveInverted)
-    // this.setup()
 
-
-
-    // this.$http.get('links?heap&only=socket').then((response) => {
-    //
-    //   if (response) {
-    //
-    //     console.log('loadActivePorts', response)
-    //     // commit('ADD_ACTIVE_PORTS', response.data)
-    //
-    //   }
-    //
-    // })
-    // let tree_ = this.$store.getters['getDevices']
-    // let test = this.treeFilter(tree_)
-    // console.log('test', test)
-
+    this.setup()
 
   },
 
-  beforeMounted () {
+  beforeMounted () {},
 
+  mounted () {},
 
+  updated () {},
 
-  },
+  beforeDestroy () {},
 
-  mounted () {
-
-    this.active.push(this.getDevices[0])
-
-  },
-
-  updated () {
-
-    // this.setup()
-
-  },
-  beforeDestroy () {
-    // window.removeEventListener('resize', this.onResponsiveInverted)
-  },
   methods: {
 
     testhandler: function (payload) {
@@ -231,58 +162,54 @@ export default {
 
     },
 
-    treeFilter: function (payload) {
-
-      function seek (arr) {
-
-        let newArr = arr.map(item => {
-
-          if(item.children && item.children.length > 0) {
-            // if(item.cls == 'device') return
-            seek(item.children)
-          }
-          if(item.cls == 'cabinet') {
-            item.children = []
-          }
-          return item
-        })
-        return newArr
-      }
-      return seek(payload)
-      // console.log('arr', arr)
-
-
-    },
-
     setup: function () {
 
       if (this.$route.meta.sidebar === 'physical') {
-        // console.log('this.loadDevices() started')
-        // this.loadDevices()
-        this.$store.dispatch('loadDevices')
-        return
+
+        this.loadTree()
+
       }
 
       if (this.$route.meta.sidebar === 'logical') {
-        // console.log('this.loadDevices() started')
-        // this.loadConnections()
         return
       }
 
     },
 
-    loadActivePorts: function () {
-      // console.log('this.loadActivePorts() started')
-      // this.$store.dispatch('loadActivePorts')
+    loadTree: async function () {
+
+      await this.$store.dispatch('loadDevices').then(() => {
+
+        if(!this.$store.state.devices.devices) return
+
+        let data = this.$merge([], this.$store.state.devices.devices)
+
+
+        function get (arr) {
+
+          let array = arr.map(item => {
+
+            if(item.cls && item.cls == 'cabinet') {
+              item.children = []
+            }
+            if(item.cls && item.cls == 'device') {
+              item.children = []
+            }
+            if(item.children && item.children.length > 0) {
+              get(item.children)
+            }
+
+            return item
+          })
+          return array
+        }
+
+        this.tree = get(data)
+
+        this.active.push(this.tree[0])
+
+      })
     },
-    // ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
-    // onResponsiveInverted () {
-    //   if (window.innerWidth < 991) {
-    //     this.responsive = true
-    //   } else {
-    //     this.responsive = false
-    //   }
-    // }
   }
 }
 </script>

@@ -7,7 +7,7 @@
         <v-layout class="pink--" justify-space-between align-center px-1>
 
           <v-flex class="pink">
-            <span class="title font-weight-medium">Локация</span>
+            <span class="title font-weight-medium">{{getActiveLocation.name}}</span>
           </v-flex>
 
           <v-flex xs2>
@@ -28,8 +28,15 @@
         </v-layout>
 
         <v-layout class="cyan--" justify-start px-1>
-          <v-flex class="pink">
-            <span class="title font-weight-medium">navigation path / navigation path / navigation path</span>
+          <v-flex shrink class="pink" pr-2
+            @click="() => testAlert(getActiveLocation.name + ' открываем интерфейс создания локации')"
+          >
+            <span class="title font-weight-medium">Создание новой локации</span>
+          </v-flex>
+          <v-flex shrink class="pink" pr-2
+            @click="() => testAlert(getActiveLocation.name + ' открываем интерфейс импорта локации из шаблона')"
+          >
+            <span class="title font-weight-medium">Импорт локации из шаблона</span>
           </v-flex>
         </v-layout>
 
@@ -52,7 +59,7 @@
         <v-layout fill-height class="white" ma-0>
 
           <v-flex class="blue lighten-4">
-            <!-- {{getSelected}} -->
+            {{getActiveLocation}}
           </v-flex>
 
         </v-layout>
@@ -74,16 +81,23 @@ export default {
   props: {},
 
   data: () => ({
-    location: {}
+    location: {},
+    crumbs: ''
   }),
 
   computed: {
 
-    getSelected: function () {
+    getActiveLocation: function () {
 
-      return this.$store.getters['getSelected']
+      return this.$store.getters['getActiveLocation']
 
     },
+
+    // getCrumbs: function () {
+    //
+    //   return this.crumbs
+    //
+    // },
 
   },
 
@@ -93,19 +107,12 @@ export default {
 
     console.log('location page created')
 
-
   },
 
-  mounted () {
-    let sel = this.$store.getters['getSelected']
-    console.log('sel', sel)
-  },
+  mounted () {},
 
   updated () {
-    let sel = this.$store.getters['getSelected']
-    console.log('sel', sel)
-    console.log('location page updated')
-
+    // this.createCrumbs()
   },
 
   beforeDestroy () {},
@@ -113,6 +120,62 @@ export default {
   methods: {
 
     setup: function () {},
+
+    testAlert: function (message) {
+
+      alert(message)
+
+    },
+
+    // createCrumbs: function () {
+    //
+    //   let active = this.$store.state.devices.activeLocation
+    //   let activeElem = active.cls + active.id
+    //   let structure = this.$store.state.devices.devices
+    //   // console.log('ACTIVE', active.cls, active.id)
+    //   // console.log('STRUCTURE', structure)
+    //
+    //   let crumbs = Array(6)
+    //   // console.log('crumbs', crumbs)
+    //   function makeCounter() {
+    //     var currentCount = 0;
+    //
+    //     return function() {
+    //       return currentCount++;
+    //     };
+    //   }
+    //   let counter = 0
+    //
+    //   let chips
+    //
+    //   function get (arr, merge) {
+    //
+    //     arr.forEach(item => {
+    //       crumbs.splice(counter, 1, item.name)
+    //
+    //       if(item.cls + item.id == activeElem) {
+    //         console.log('find!!!', 'item: ', item.name, 'activeElem: ', active.name,  crumbs)
+    //         let c = merge([], crumbs)
+    //         chips = c.slice(0, counter)
+    //         // console.log('counter', counter)
+    //         console.log('chips', chips)
+    //         return
+    //       }
+    //
+    //       if(item.children && item.children.length) {
+    //         counter++
+    //         get(item.children, merge)
+    //       }
+    //       counter = 0
+    //     })
+    //   }
+    //
+    //   get(structure, this.$merge)
+    //   // console.log('CRUMBS', crumbs)
+    //   // console.log('CHIPS', chips)
+    //   this.crumbs = chips
+    //
+    // }
 
   },
 

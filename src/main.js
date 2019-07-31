@@ -78,6 +78,9 @@ Vue.prototype.$http = $_instanceAxios
 // import VueWebsocket from 'vue-websocket'
 // Vue.use(VueWebsocket, "ws://192.168.50.37:3000");
 
+import merge from 'deepmerge'
+Vue.prototype.$merge = merge
+
 
 import CBridge from 'upkmbridge'
 const $_bridge = new CBridge()

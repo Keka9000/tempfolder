@@ -79,7 +79,7 @@ const routes = [
                 sidebar: 'physical',
                 // requiresAuth: true
               },
-              component: () => import('@/pages/cmdb/building'),
+              component: () => import('@/pages/cmdb/location'),
             },
     //
             {

@@ -66,7 +66,6 @@ export default {
     size: null,
     side: '',
     unit: {},
-    response: {},
 
   }),
 
@@ -92,7 +91,6 @@ export default {
 
       let keys = Object.keys(this.unit).slice().reverse();
 
-
       return keys
 
     },
@@ -102,6 +100,8 @@ export default {
   watch: {
 
     data (newVal) {
+
+      if(!newVal) return
 
       this.setup()
 
@@ -130,8 +130,6 @@ export default {
 
     setup: function () {
 
-      // let cabinet = this.$store.getters['getActiveCabinet']
-      // console.log('cabinet', cabinet)
       this.size = this.data.usize
       this.side = this.mountSide
       // console.log('side', this.side)
@@ -154,13 +152,16 @@ export default {
     },
 
     addUnitStatus: function () {
+
+      if(!this.data.children) return
+
       this.data.children.forEach(device => {
 
         this.unit[device.position].open = false
         if(device.height && device.height > 45) {
 
           let count = Math.ceil( device.height / 45 )
-          console.log('big device', device.name, count)
+          // console.log('big device', device.name, count)
           for(let i = device.position; i > device.position - count; i--) {
             this.unit[i].open = false
           }
@@ -186,11 +187,7 @@ export default {
       this.$emit('selectDevice', payload)
 
     },
-
-
-
   },
-
 }
 </script>
 
