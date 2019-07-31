@@ -10,14 +10,14 @@
             <span class="title font-weight-medium">{{getActiveLocation.name}}</span>
           </v-flex>
 
-          <v-flex xs2>
+          <v-flex shrink>
 
             <v-layout class="grey--" fill-height justify-space-around align-center px-2>
 
               <v-btn flat icon color="primary">
                 <v-icon color="primary">star_outline</v-icon>
               </v-btn>
-              <v-flex ml-3>
+              <v-flex shrink ml-3 class="green---">
                 <span class="subheader">Избранное</span>
               </v-flex>
 
@@ -28,12 +28,12 @@
         </v-layout>
 
         <v-layout class="cyan--" justify-start px-1>
-          <v-flex shrink class="pink" pr-2
+          <v-flex shrink class="create-location" pr-2
             @click="() => testAlert(getActiveLocation.name + ' открываем интерфейс создания локации')"
           >
             <span class="title font-weight-medium">Создание новой локации</span>
           </v-flex>
-          <v-flex shrink class="pink" pr-2
+          <v-flex shrink class="create-location"  pr-2
             @click="() => testAlert(getActiveLocation.name + ' открываем интерфейс импорта локации из шаблона')"
           >
             <span class="title font-weight-medium">Импорт локации из шаблона</span>
@@ -81,7 +81,9 @@ export default {
   props: {},
 
   data: () => ({
-    location: {},
+    model: {
+
+    }
     crumbs: ''
   }),
 
@@ -182,5 +184,15 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+
+.create-location {
+  background-color: transparent;
+}
+
+.create-location:hover {
+    background-color: blue;
+    cursor: pointer;
+}
+
 </style>

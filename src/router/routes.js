@@ -45,7 +45,7 @@ const routes = [
 
                 // requiresAuth: true
               },
-              component: () => import('@/pages/cmdb/location'),
+              component: () => import('@/pages/cmdb/location/location'),
 
             },
     //
@@ -57,7 +57,18 @@ const routes = [
                 sidebar: 'physical',
                 // requiresAuth: true
               },
-              component: () => import('@/pages/cmdb/location'),
+              component: () => import('@/pages/cmdb/location/location'),
+            },
+
+            {
+              // path: '/physical/location/:location_id(\\d+)',
+              path: '/physical/subzone',
+              name: 'subzone',
+              meta: {
+                sidebar: 'physical',
+                // requiresAuth: true
+              },
+              component: () => import('@/pages/cmdb/location/location'),
             },
 
             {
@@ -68,7 +79,7 @@ const routes = [
                 sidebar: 'physical',
                 // requiresAuth: true
               },
-              component: () => import('@/pages/cmdb/location'),
+              component: () => import('@/pages/cmdb/location/location'),
             },
 
             {
@@ -79,7 +90,7 @@ const routes = [
                 sidebar: 'physical',
                 // requiresAuth: true
               },
-              component: () => import('@/pages/cmdb/location'),
+              component: () => import('@/pages/cmdb/location/location'),
             },
     //
             {
