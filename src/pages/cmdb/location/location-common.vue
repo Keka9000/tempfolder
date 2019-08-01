@@ -1,9 +1,9 @@
 <template>
   <v-container fluid fill-height pa-0>
     <v-layout column fill-height ma-0>
-      <v-flex xs3 class="yellow" pa-1>
-        <v-layout fill-height class="white" ma-0>
-          <v-flex xs8 class="blue">
+      <v-flex xs3 class="yellow--" pa-1>
+        <v-layout fill-height class="white--" ma-0>
+          <v-flex xs8 class="blue--">
             <v-layout column>
               <v-flex xs12
                 v-for="(field, index) in getMeta.fields"
@@ -15,20 +15,20 @@
             </v-layout>
           </v-flex>
 
-          <v-flex xs4 class="blue lighten-3">
+          <v-flex xs4 class="blue-- lighten-3">
 
           </v-flex>
 
         </v-layout>
       </v-flex>
 
-      <v-flex xs2 class="green" pa-1>
+      <v-flex xs2 class="green--" pa-1>
         <v-layout column fill-height class="white" ma-0>
 
-          <v-flex class="blue lighten-4">
+          <v-flex class="blue-- lighten-4">
             {{getData}}
           </v-flex>
-          <v-flex class="blue lighten-2">
+          <v-flex class="blue-- lighten-2">
             <!-- Доступные локации для создания {{getMeta.children}} -->
             {{getMeta}}
           </v-flex>
@@ -37,16 +37,23 @@
       </v-flex>
 
       <v-flex class="grey" pa-1>
-
+        <component
+          is="location-map"
+        />
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+
+import LocationMap from '@/components/map/map'
+
 export default {
 
-  components: {},
+  components: {
+    LocationMap,
+  },
 
   props: {
     data: {

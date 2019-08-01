@@ -1,8 +1,8 @@
 <template>
 
-  <div class="cabinet">
+  <div class="cabinet red--">
 
-    <v-layout column class="wrapper">
+    <v-layout column class="green-- wrapper">
 
         <another-device v-if="getDevices" v-for="(device, index) in getDevices" :key="device.name"
           :data="device"
@@ -28,9 +28,12 @@
           <!-- closed -->
         </div>
 
-        <v-flex class="red-- headline test-xs-center" ml-3 pt-2>
+        <!-- <v-flex class="blue headline test-xs-center" ml-3 pt-2>
           {{key}}
-        </v-flex>
+        </v-flex> -->
+        <div class="blue-- headline test-xs-center unit-positions">
+          {{key}}
+        </div>
 
       </v-layout>
 
@@ -198,13 +201,19 @@ export default {
   width: 100%;
   /* transform-origin: 0 0; */
   /* transform: scale(.45); */
-  position: absolute;
+  position: relative;
   cursor: pointer;
+  background-image: url(cabinet42/template/_rack.png);
 }
 
 .wrapper {
   transform-origin: 0 0;
   transform: scale(.45);
+  left: 28px;
+  top: 28px;
+
+  /* padding: 14px 0px 20px 6px; */
+
   position: absolute;
 }
 
@@ -229,9 +238,12 @@ export default {
   }
 
 .unit-positions {
-  width:20px;
-  height:900px;
-  padding: 28px 0px 32px 6px;
+  width: 150px;
+  display: flex;
+  justify-content: flex-end;
+  /* height:900px; */
+  padding: 6px 0px 0px 0px;
+
   /* position: relative; */
   /* background-color: white; */
   /* border: solid 1px grey */

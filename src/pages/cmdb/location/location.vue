@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid fill-height class="blue" pa-0>
+  <v-container fluid fill-height class="blue--" pa-0>
     <v-layout column class="yellow--" pa-2>
 
       <v-flex xs1>
 
         <v-layout class="pink--" justify-space-between align-center px-1>
 
-          <v-flex class="pink">
+          <v-flex class="pink--">
             <span class="title font-weight-medium">{{getData.name}}</span>
           </v-flex>
 
@@ -50,7 +50,13 @@
 
 
           </v-app-bar> -->
-          <v-breadcrumbs :items="getCrumbs">
+          <component
+            is="crumbs"
+            :crumbs="getCrumbs"
+            @crumbClick="(payload) => testAlert(payload)"
+          />
+
+          <!-- <v-breadcrumbs :items="getCrumbs">
             <template v-slot:item="props">
               <v-flex
                 class="crumbs subheading font-weight-regular text-uppercase"
@@ -59,7 +65,7 @@
                 {{ props.item.name }}
               </v-flex>
             </template>
-          </v-breadcrumbs>
+          </v-breadcrumbs> -->
 
           <!-- <v-chip
             v-for="(crumb, index) in getCrumbs"
@@ -70,22 +76,26 @@
           </v-chip> -->
         </v-layout>
 
-        <v-layout class="cyan--" justify-start px-1>
+        <v-layout class="cyan--" justify-start px-1 mt-2>
           <v-flex shrink class="create-location" pr-2
             @click="model.show = 'create'"
           >
-            <span class="title font-weight-medium">Создание новой локации</span>
+            <!-- <span class="title font-weight-medium">Создание новой локации</span> -->
+            <v-btn small class="primary font-weight-medium">Создание новой локации</v-btn>
           </v-flex>
           <v-flex shrink class="create-location"  pr-2
             @click="model.show = 'import'"
           >
-            <span class="title font-weight-medium">Импорт локации из шаблона</span>
+            <v-btn small class="primary font-weight-medium">Импорт локации из шаблона</v-btn>
+            <!-- <span class="title font-weight-medium">Импорт локации из шаблона</span> -->
           </v-flex>
         </v-layout>
 
       </v-flex>
 
-      <v-flex xs11 class="black" pa-1>
+      <v-divider></v-divider>
+
+      <v-flex xs11 class="black--" pa-1>
 
         <component
           :is="getShowModel"
@@ -105,13 +115,16 @@
 import Common from './location-common'
 import Create from './location-create'
 import Import from './location-import'
+import Crumbs from '@/components/partials/bread-crumbs'
+
 
 export default {
 
   components: {
     Common,
     Create,
-    Import
+    Import,
+    Crumbs
   },
 
   props: {},

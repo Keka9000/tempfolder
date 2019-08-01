@@ -84,8 +84,9 @@ Vue.prototype.$merge = merge
 
 import CBridge from 'upkmbridge'
 const $_bridge = new CBridge()
-// await bridge.connect('http://192.168.50.38', '1', '2')
+$_bridge.connect('http://192.168.50.38', '1', '2')
 
+// await bridge.connect('http://192.168.50.38', '1', '2')
 
 Vue.prototype.$bridge = $_bridge
 

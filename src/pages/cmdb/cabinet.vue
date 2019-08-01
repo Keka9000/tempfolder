@@ -3,7 +3,7 @@
 
       <v-layout fill-height class="black--" justify-space-between ma-0 pa-0 >
 
-        <v-flex xs3 ma-0 pa-0 px-2>
+        <v-flex xs4 ma-0 pa-0 px-2>
 
           <v-layout fill-height class="blue--" style="position: relative" justify-space-around align-center ma-0 pa-0 >
 
@@ -20,7 +20,7 @@
 
         </v-flex>
 
-        <v-flex xs3 v-if="showRear"  ma-0 pa-0 px-2>
+        <v-flex xs4 v-if="showRear"  ma-0 pa-0 px-2>
 
           <v-layout fill-height class="blue--" style="position: relative" justify-space-around align-center ma-0 pa-0 >
 
