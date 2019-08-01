@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "upkmbridge": "http://uni-as.uni-eng.ru:7990/scm/mosaika/upkmbridge.git",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -58,7 +59,7 @@
     "vue-template-compiler": "^2.5.2",
     "vue-websocket": "^0.2.3",
     "vue2-leaflet": "^2.2.1",
-    "vuetify": "^2.0.3",
+    "vuetify": "1.5.16",
     "vuex": "^3.1.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
