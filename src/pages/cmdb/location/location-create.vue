@@ -1,9 +1,18 @@
 <template>
   <v-container fluid fill-height pa-0>
-    <v-layout column fill-height ma-0>
+    <v-layout column ma-0>
 
-      <v-flex xs1 class="red" pa-1>
-        компонент создания новой локации
+      <v-flex xs1 class="red--" pa-1>
+        <v-layout fill-height ma-0 align-center>
+          <!-- <v-flex class="text-xs-center" shrink pa-1> -->
+            <span class="subheading font-weight-regular">Локация создается в</span>
+          <!-- </v-flex> -->
+          <component
+            is="crumbs"
+            :crumbs="getCrumbs"
+            @crumbClick="(payload) => testAlert(payload)"
+          />
+        </v-layout>
         <!-- <v-layout fill-height class="white" ma-0>
           <v-flex xs8 class="blue">
 
@@ -53,20 +62,25 @@
         </v-layout>
       </v-flex> -->
 
-      <v-flex class="grey" pa-1>
+      <v-layout class="grey--" justify-end pa-1>
         <v-btn small color="primary" @click="">Добавить</v-btn>
 
         <v-btn small flat active-class @click="()=>this.$emit('cansel')">Отменить</v-btn>
-      </v-flex>
+      </v-layout>
 
     </v-layout>
   </v-container>
 </template>
 
 <script>
+
+import Crumbs from '@/components/partials/bread-crumbs'
+
 export default {
 
-  components: {},
+  components: {
+    Crumbs
+  },
 
   props: {
     data: {
@@ -106,6 +120,16 @@ export default {
       return this.crumbs
 
     }
+
+  },
+
+  methods: {
+
+    testAlert: function (message) {
+
+      alert(message)
+
+    },
 
   },
 

@@ -14,7 +14,6 @@
             :id="props.item.cls + '$' + props.item.id"
             @click="(payload) => clickHandler(payload)"
           >
-            <!-- {{ props.item.name }} -->
             {{ props.item.name }}
           </v-flex>
         </template>
@@ -79,6 +78,7 @@ export default {
 
 .crumbs:hover {
   color: red;
+  font-weight: 500;
   cursor: pointer;
 }
 </style>

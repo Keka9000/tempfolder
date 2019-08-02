@@ -5,6 +5,18 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+
+const i18n = new VueI18n({
+  locale: 'ru',
+  messages: {
+    ru: {},
+    en: {}
+  }
+})
+
+
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
@@ -95,6 +107,7 @@ Vue.config.productionTip = false
 
 new Vue({
   el: '#app',
+  i18n,
   router,
   store,
   components: { App },

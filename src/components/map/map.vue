@@ -63,7 +63,7 @@ delete L.Icon.Default.prototype._getIconUrl
     });
 
     L.Map.mergeOptions({
-        zoomControl: true,
+        zoomControl: false,
         zoomSnap: 0.25,
         zoomDelta: 0.25,
         attributionControl: false,
@@ -134,7 +134,7 @@ export default {
 
   }),
 
-  
+
 
 }
 </script>

@@ -35,6 +35,7 @@
               :open="open"
               :items="getTree"
               :active.sync="active"
+              active-class="primary"
               item-disabled="disabled"
               activatable
               item-key="name"

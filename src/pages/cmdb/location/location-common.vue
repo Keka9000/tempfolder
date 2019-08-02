@@ -1,13 +1,14 @@
 <template>
   <v-container fluid fill-height pa-0>
     <v-layout column fill-height ma-0>
-      <v-flex xs3 class="yellow--" pa-1>
+      <v-flex xs3 class="yellow--" pa-0>
         <v-layout fill-height class="white--" ma-0>
           <v-flex xs8 class="blue--">
             <v-layout column>
               <v-flex xs12
                 v-for="(field, index) in getMeta.fields"
                 :key="index"
+                py-2
               >
                 <span class="title font-weight-medium font-condensend">{{field.name + ': '}}{{getData[field.name]}}</span>
               </v-flex>
@@ -15,28 +16,30 @@
             </v-layout>
           </v-flex>
 
-          <v-flex xs4 class="blue-- lighten-3">
-
+          <v-flex xs4 class="grey lighten-1" pa-1>
+            <component
+              is="location-map"
+            />
           </v-flex>
 
         </v-layout>
       </v-flex>
 
-      <v-flex xs2 class="green--" pa-1>
-        <v-layout column fill-height class="white" ma-0>
+      <v-flex xs2 class="green--" pa-0>
+        <v-layout column fill-height class="white--" ma-0>
 
-          <v-flex class="blue-- lighten-4">
-            {{getData}}
+          <v-flex class="blue lighten-4">
+            <!-- {{getData}} -->
           </v-flex>
-          <v-flex class="blue-- lighten-2">
+          <v-flex class="blue lighten-2">
             <!-- Доступные локации для создания {{getMeta.children}} -->
-            {{getMeta}}
+            <!-- {{getMeta}} -->
           </v-flex>
 
         </v-layout>
       </v-flex>
 
-      <v-flex class="grey" pa-1>
+      <v-flex class="grey lighten-1" pa-1>
         <component
           is="location-map"
         />

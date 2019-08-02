@@ -1,3 +1,17 @@
+<i18n>
+  {
+    "en": {
+      "create new location": "create new location",
+      "import location from template": "import location from template",
+    },
+    "ru": {
+      "create new location": "Создание новой локации",
+      "import location from template": "Импорт локации из шаблона",
+    }
+  }
+</i18n>
+
+
 <template>
   <v-container fluid fill-height class="blue--" pa-0>
     <v-layout column class="yellow--" pa-2>
@@ -29,7 +43,7 @@
 
         <v-layout align-baseline>
 
-          <span v-if="model.show !='common'" class="subheading font-weight-regular">Локация создается в:</span>
+          <!-- <span v-if="model.show !='common'" class="subheading font-weight-regular">Локация создается в:</span> -->
           <!-- <v-app-bar
             color="deep-purple accent-4"
             dense
@@ -51,6 +65,7 @@
 
           </v-app-bar> -->
           <component
+            v-if="model.show =='common'"
             is="crumbs"
             :crumbs="getCrumbs"
             @crumbClick="(payload) => testAlert(payload)"
@@ -76,26 +91,36 @@
           </v-chip> -->
         </v-layout>
 
-        <v-layout class="cyan--" justify-start px-1 mt-2>
+        <v-layout class="cyan--" justify-start px-1 mt-2
+          v-if="model.show =='common'"
+        >
           <v-flex shrink class="create-location" pr-2
             @click="model.show = 'create'"
           >
             <!-- <span class="title font-weight-medium">Создание новой локации</span> -->
-            <v-btn small class="primary font-weight-medium">Создание новой локации</v-btn>
+            <v-btn dark small class="grey lighten-2 font-weight-medium">Создание новой локации</v-btn>
+            <!-- <v-btn dark small class="grey lighten-2 font-weight-medium">{{ $t('create new location') }}</v-btn> -->
           </v-flex>
           <v-flex shrink class="create-location"  pr-2
             @click="model.show = 'import'"
           >
-            <v-btn small class="primary font-weight-medium">Импорт локации из шаблона</v-btn>
+            <v-btn dark small class="grey lighten-2 font-weight-medium">Импорт локации из шаблона</v-btn>
+            <!-- <v-btn dark small class="grey lighten-2 font-weight-medium">message: {{ $t('import location from template') }}</v-btn> -->
             <!-- <span class="title font-weight-medium">Импорт локации из шаблона</span> -->
           </v-flex>
         </v-layout>
 
       </v-flex>
 
-      <v-divider></v-divider>
+      <!-- <v-divider ></v-divider> -->
+      <v-progress-linear
+        value="0"
+        height="5"
+        class="grey lighten-2"
+        background-color="transparent"
+      ></v-progress-linear>
 
-      <v-flex xs11 class="black--" pa-1>
+      <v-flex xs11 class="black--" pa-0>
 
         <component
           :is="getShowModel"
@@ -139,6 +164,8 @@ export default {
   }),
 
   computed: {
+
+
 
     getData: function () {
 
@@ -203,8 +230,7 @@ export default {
 
     loadMeta: async function() {
       console.log('loadMeta started')
-      await this.$http.get(this.location.cls + '/meta').then((response) => {
-
+      await this.$bridge.getMeta(this.location.cls).then((response) => {
           if (response) {
               console.log('Location', 'loadMeta', 'response', response)
               this.meta = response.data
@@ -213,6 +239,16 @@ export default {
               console.log('Location', this.location.cls, this.location.id, 'loadMeta smth wrong')
           }
       })
+      // await this.$http.get(this.location.cls + '/meta').then((response) => {
+      //
+      //     if (response) {
+      //         console.log('Location', 'loadMeta', 'response', response)
+      //         this.meta = response.data
+      //         this.createCrumbs()
+      //     } else {
+      //         console.log('Location', this.location.cls, this.location.id, 'loadMeta smth wrong')
+      //     }
+      // })
     },
 
     createCrumbs: async function() {

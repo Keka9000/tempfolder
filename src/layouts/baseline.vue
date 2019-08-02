@@ -128,7 +128,7 @@
 
                     <!-- <v-btn depressed small color="warning darken-1">Предупреждений 12</v-btn>
                     <v-btn depressed small color="accent">Потерь связи 38</v-btn> -->
-                    <v-btn disabled flat>Иван Иванович</v-btn>
+                    <v-btn disabled flat @click="() => {this.$i18n.locale = 'ru'}">Иван Иванович</v-btn>
                   </v-layout>
 
                   <v-layout fill-height>
@@ -207,7 +207,7 @@
         },
 
         data: () => ({
-
+            locale: 'ru',
             logo: require('@/assets/mosaica_logo.png'),
             modules: ['CMDB', 'Monitoring', 'Dashboard'],
             activePage: null,
@@ -258,9 +258,16 @@
 
         methods: {
 
+
           setup: function () {
 
-            // this.$store.dispatch('loadTasks')
+            this.locale = this.$i18n.locale
+            console.log('sidebar locale', this.locale)
+
+
+          },
+
+          testLocaleChange: function () {
 
 
           },
