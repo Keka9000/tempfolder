@@ -197,7 +197,7 @@ export default {
   watch: {
 
     '$store.state.devices.activeLocation': function(newVal) {
-      console.log('newVal on WATCH', newVal)
+      // console.log('newVal on WATCH', newVal)
       if(!newVal) return
       // this.location = this.$merge({}, newVal)
       // this.model.show = "common"
@@ -221,7 +221,7 @@ export default {
   methods: {
 
     setup: function () {
-      console.log('location setup started')
+      // console.log('location setup started')
       if(!this.$store.state.devices.activeLocation) return
       this.location = this.$merge({}, this.$store.state.devices.activeLocation)
       this.model.show = "common"
@@ -229,10 +229,10 @@ export default {
     },
 
     loadMeta: async function() {
-      console.log('loadMeta started')
+      // console.log('loadMeta started')
       await this.$bridge.getMeta(this.location.cls).then((response) => {
           if (response) {
-              console.log('Location', 'loadMeta', 'response', response)
+              // console.log('Location', 'loadMeta', 'response', response)
               this.meta = response.data
               this.createCrumbs()
           } else {
@@ -255,7 +255,7 @@ export default {
       let child = this.$store.state.devices.activeLocation
       // api/:cls/:id/path[?include][&compute]
       await this.$http.get(child.cls + '/' + child.id + '/path').then((response) => {
-        console.log('Location', 'createCrumbs', 'response', response)
+        // console.log('Location', 'createCrumbs', 'response', response)
         this.crumbs = this.$merge([], response.data)
       })
 

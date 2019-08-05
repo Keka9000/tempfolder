@@ -207,7 +207,7 @@ export default {
 
   created () {
 
-    console.log('cabinet page created')
+    // console.log('cabinet page created')
 
   },
 
@@ -215,7 +215,7 @@ export default {
 
   updated () {
 
-    console.log('cabinet page updated')
+    // console.log('cabinet page updated')
 
   },
 

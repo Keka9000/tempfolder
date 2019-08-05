@@ -4,7 +4,7 @@
 
     <v-layout column class="green-- wrapper">
 
-        <another-device v-if="getDevices" v-for="(device, index) in getDevices" :key="device.name"
+        <device v-if="getDevices" v-for="(device, index) in getDevices" :key="device.name"
           :data="device"
           @select="(payload) => deviceSelectHandler(payload)"
         />
@@ -45,13 +45,13 @@
 
 <script>
 
-import AnotherDevice from '@/components/physical/device/another-device'
+import Device from '@/components/physical/device/device'
 
 export default {
 
   components: {
 
-    AnotherDevice
+    Device
 
   },
 
@@ -114,7 +114,7 @@ export default {
 
   created () {
 
-    console.log('cabinet created')
+    // console.log('cabinet created')
     this.setup()
 
   },
@@ -123,7 +123,7 @@ export default {
 
   updated () {
 
-    console.log('cabinet updated')
+    // console.log('cabinet updated')
     // this.setup()
   },
 
@@ -157,7 +157,7 @@ export default {
     addUnitStatus: function () {
 
       if(!this.data.children) return
-      console.log('addUnitStatus children', this.data.children)
+      // console.log('addUnitStatus children', this.data.children)
       this.data.children.forEach(device => {
 
         this.unit[device.position].open = false
