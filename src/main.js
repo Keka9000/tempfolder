@@ -101,8 +101,9 @@ $_bridge.connect('http://192.168.50.38', '1', '2')
 
 Vue.prototype.$bridge = $_bridge
 
-
+import '../node_modules/material-design-icons-iconfont/dist/material-design-icons.css'
 import './assets/styles/styles.styl'
+
 
 
 Vue.config.productionTip = false
