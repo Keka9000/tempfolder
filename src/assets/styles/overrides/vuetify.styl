@@ -1,0 +1,119 @@
+.application
+
+    @font-face
+      font-family: 'Roboto'
+      src: url('./../../assets/fonts/Roboto/Roboto-Medium.ttf')
+
+
+
+    min-width: 1360px
+    // overflow-x: scroll
+
+    // @media screen and (min-width: 1360px)
+    //
+    //     overflow-x: auto
+
+    .v-toolbar
+
+        .v-toolbar__content
+
+            padding: 0 16px
+
+    .menu__content
+
+        &.menuable__content__active
+
+            z-index: 3001!important
+
+    // .theme--light
+
+        // &.list
+
+    // .theme--light
+
+    // .v-overlay.v-overlay--active
+    //
+    //     z-index: 2000!important
+
+    // .v-dialog__content
+    //
+    //     z-index: 2001!important
+
+    .v-btn
+
+        &--active,
+        &:focus,
+        &:hover
+
+            &.transparent
+
+                &:before
+
+                    background-color: transparent
+
+
+    .v-menu__content
+
+        .v-list__tile__action
+
+            min-width: 38px
+
+    .v-list
+
+        .list__tile__mask
+
+            // color: red
+            // color: orange
+
+            // color: #1976d2 // Закупки
+            color: #B71C1C
+            background: transparent
+
+        .v-list__tile--link
+
+            &.v-list__tile--active
+
+                cursor: default
+                // background: alpha(#000, .04)
+
+                &:hover
+
+                    background: inherit
+
+
+    .text--disabled
+
+        .list__tile
+
+            &.list__tile--link
+
+                &.list__tile--disabled
+
+                    /* no-data-text */
+                    background: transparent
+
+                    .list__tile__title
+
+                        /* no-data-text */
+                        color: #263045 // primary
+
+
+    // Textarea border width
+    .theme--light.v-text-field--outline > .v-input__control > .v-input__slot,
+    .theme--light.v-text-field--outline:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover,
+    .theme--light.v-text-field--outline:not(.v-input--is-focused):not(.v-input--has-state)>.v-input__control>.v-input__slot:hover
+
+        border-width: 1px
+
+
+.application .theme--light.input-group.input-group--textarea:not(.input-group--full-width) .input-group__input,
+.theme--light .input-group.input-group--textarea:not(.input-group--full-width) .input-group__input
+
+    border-width: 1px
+    /* background: alpha(black, .08) */
+
+.application .theme--light.input-group.input-group--textarea:not(.input-group--focused) .input-group__input,
+.theme--light .input-group.input-group--textarea:not(.input-group--focused) .input-group__input
+
+    border-color: alpha(black, .32)
+    background: alpha(black, .08)

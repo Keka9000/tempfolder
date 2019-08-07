@@ -1,0 +1,73 @@
+.application
+
+    .no-display
+
+        display: none
+
+    .no-visible
+
+        visibility: hidden
+
+    .no-select,
+    .non-selectable
+
+        // user-select: none!important
+        user-select: none
+
+    .no-pointer-events
+
+        // pointer-events: none!important
+        pointer-events: none
+
+    .all-pointer-events
+
+        // pointer-events: all!important
+        pointer-events: all
+
+    .no-transition
+
+        transition: none
+
+    .no-scroll
+
+        // overflow: hidden!important
+        overflow: hidden
+
+    .scroll
+
+        overflow: auto
+
+    .scroll,
+    .scroll-x,
+    .scroll-y
+
+        -webkit-overflow-scrolling: touch
+        will-change: scroll-position
+
+    .scroll-x
+
+        overflow-x: auto
+
+    .scroll-y
+
+        overflow-y: auto
+
+    .v-touch
+
+        -khtml-user-drag: none
+        -moz-user-select: none
+        -ms-user-select: none
+        -webkit-user-drag: none
+        -webkit-user-select: none
+        user-drag: none
+        user-select: none
+
+    .v-touch-x
+
+        -ms-touch-action: pan-x
+        touch-action: pan-x
+
+    .v-touch-y
+
+        -ms-touch-action: pan-y
+        touch-action: pan-y

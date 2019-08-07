@@ -1,0 +1,27 @@
+.application
+
+    .note
+
+        &_no-data
+
+            position: relative
+            user-select: none
+            opacity: .4
+
+            &:before
+
+                content: 'Нет данных'
+                position: absolute
+
+                top: calc(50% - (264px)/2)
+                left: 20%
+
+                z-index: 4
+
+                font-weight: 900
+                font-size: 450%
+
+                opacity: 1.0!important
+                /* filter: blur(0px)!important */
+
+                transform: rotate(35deg)
