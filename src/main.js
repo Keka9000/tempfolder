@@ -18,8 +18,24 @@ import store from './store'
 
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+// import Vuetify, {
+//   VApp, VAutocomplete, VAvatar, VBreadcrumbs, VBtn, VCard, VCheckbox, VChip, VCombobox, VDataTable, VDialog, VDivider,
+//   VForm, VGrid, VIcon, VInput, VList, VMenu, VNavigationDrawer, VProgressLinear, VSelect, VTabs, VTextField, VToolbar, VTreeview
+// }  from 'vuetify/lib'
+//
+// import { Ripple } from 'vuetify/lib/directives'
 
+//
   Vue.use(Vuetify, {
+
+      // components: {
+      //   VApp, VAutocomplete, VAvatar, VBreadcrumbs, VBtn, VCard, VCheckbox, VChip, VCombobox, VDataTable, VDialog, VDivider,
+      //   VForm, VIcon, VInput, VList, VMenu, VNavigationDrawer, VProgressLinear, VSelect, VTabs, VTextField, VToolbar, VTreeview
+      // },
+      //
+      // directives: {
+      //   Ripple,
+      // },
 
       theme: {
 
@@ -36,6 +52,8 @@ import 'vuetify/dist/vuetify.min.css'
       }
 
   })
+
+
 
 import VueMoment from 'vue-moment'
 import moment from 'moment-timezone'
